@@ -4,20 +4,8 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ExternalLink, Sun, Moon, ArrowLeft } from 'lucide-react';
-
-const PUBLICATIONS = [
-  {
-    title: 'Arquitetura de Microserviços na Prática',
-    description: 'Guia completo sobre design e implementação de sistemas distribuídos.',
-    link: '#',
-  },
-  {
-    title: 'Kubernetes: Do Básico ao Produção',
-    description: 'Como escalar aplicações com containers em ambientes enterprise.',
-    link: '#',
-  },
-];
+import { ExternalLink, Sun, Moon, ArrowLeft, Globe } from 'lucide-react';
+import { useLocale, translations } from '@/components/locale-provider';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -38,9 +26,15 @@ function useMounted() {
 
 export default function Publicacoes() {
   const { theme, setTheme } = useTheme();
+  const { locale, setLocale } = useLocale();
+  const t = translations[locale];
   const mounted = useMounted();
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const toggleLocale = () => {
+    setLocale(locale === 'pt-BR' ? 'en' : 'pt-BR');
+  };
 
   return (
     <div className="min-h-screen transition-colors">
@@ -50,8 +44,16 @@ export default function Publicacoes() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Back
+              {t.common.back}
             </Link>
+            <button
+              onClick={toggleLocale}
+              className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
+              aria-label="Toggle language"
+            >
+              <Globe className="w-4 h-4" />
+              {locale === 'pt-BR' ? 'PT' : 'EN'}
+            </button>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
@@ -66,8 +68,8 @@ export default function Publicacoes() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Publications</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Technical articles and content I have shared</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.publications.title}</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">{t.publications.subtitle}</p>
           </FadeIn>
         </motion.div>
       </section>
@@ -75,7 +77,7 @@ export default function Publicacoes() {
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-6">
-            {PUBLICATIONS.map((pub, index) => (
+            {t.publications.list.map((pub, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <motion.div
                   whileHover={{ scale: 1.02 }}
@@ -90,7 +92,7 @@ export default function Publicacoes() {
                     className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    Ler publicação
+                    {t.publications.readMore}
                   </a>
                 </motion.div>
               </FadeIn>

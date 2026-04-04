@@ -100,7 +100,7 @@ export default function Projetos() {
                     className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    Ver projeto
+                    {t.projectsPage.viewProject}
                   </a>
                 </motion.div>
               </FadeIn>
@@ -112,8 +112,8 @@ export default function Projetos() {
       <footer id="contato" className="py-20 px-4 bg-white dark:bg-zinc-900">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-4">Let&apos;s talk?</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-12">Entre em contato para conversas sobre tecnologia</p>
+            <h2 className="text-3xl font-semibold mb-4">{t.contact.title}</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 mb-12">{t.contact.subtitle}</p>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-4">
             <FadeIn delay={0.1}>
@@ -128,7 +128,7 @@ export default function Projetos() {
             <FadeIn delay={0.3}>
               <div className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800">
                 <MapPin className="text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>São Paulo, SP - Brasil</span>
+                <span>{t.contact.location}</span>
               </div>
             </FadeIn>
             <FadeIn delay={0.5}>

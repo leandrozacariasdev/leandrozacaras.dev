@@ -4,26 +4,8 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, Sun, Moon } from 'lucide-react';
-
-const EDUCATION = [
-  {
-    institution: 'Universidade Anhembi Morumbi',
-    degree: 'Pós-Graduação em Desenvolvimento de Software com Metodologias Ágeis',
-    period: '2020 - 2021',
-  },
-  {
-    institution: 'Faculdades Oswaldo Cruz',
-    degree: 'Tecnólogo em Sistemas de Informação',
-    period: '2005 - 2007',
-  },
-];
-
-const AWARDS = [
-  'Prêmio de profissional de destaque da área de tecnologia',
-  '3º Lugar - 1º Hackathon Viagens (44ª ABAV Expo Internacional)',
-  '1º Lugar - Hackathon Flytour em parceria com a Microsoft',
-];
+import { ArrowLeft, Sun, Moon, Globe } from 'lucide-react';
+import { useLocale, translations } from '@/components/locale-provider';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -44,9 +26,17 @@ function useMounted() {
 
 export default function Formacao() {
   const { theme, setTheme } = useTheme();
+  const { locale, setLocale } = useLocale();
+  const t = translations[locale];
   const mounted = useMounted();
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const toggleLocale = () => {
+    setLocale(locale === 'pt-BR' ? 'en' : 'pt-BR');
+  };
+
+  const educationText = t.education;
 
   return (
     <div className="min-h-screen transition-colors">
@@ -56,8 +46,16 @@ export default function Formacao() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Back
+              {t.common.back}
             </Link>
+            <button
+              onClick={toggleLocale}
+              className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
+              aria-label="Toggle language"
+            >
+              <Globe className="w-4 h-4" />
+              {locale === 'pt-BR' ? 'PT' : 'EN'}
+            </button>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
@@ -72,8 +70,8 @@ export default function Formacao() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Education & Awards</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Education and recognitions</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{educationText.title}</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">{educationText.subtitle}</p>
           </FadeIn>
         </motion.div>
       </section>
@@ -81,10 +79,10 @@ export default function Formacao() {
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <h2 className="text-2xl font-semibold mb-8">Education</h2>
+            <h2 className="text-2xl font-semibold mb-8">{educationText.educationTitle}</h2>
           </FadeIn>
           <div className="space-y-6 mb-16">
-            {EDUCATION.map((edu, index) => (
+            {educationText.education.map((edu, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <div className="flex gap-4 items-start">
                   <div className="w-3 h-3 mt-2 rounded-full bg-blue-600 flex-shrink-0" />
@@ -99,10 +97,10 @@ export default function Formacao() {
           </div>
 
           <FadeIn>
-            <h2 className="text-2xl font-semibold mb-8">Premiações</h2>
+            <h2 className="text-2xl font-semibold mb-8">{educationText.awardsTitle}</h2>
           </FadeIn>
           <div className="grid gap-4">
-            {AWARDS.map((award, index) => (
+            {t.awards.map((award, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <div className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all">
                   <div className="w-2 h-2 rounded-full bg-blue-500" />

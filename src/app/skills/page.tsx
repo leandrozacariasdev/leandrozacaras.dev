@@ -4,17 +4,18 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, Sun, Moon } from 'lucide-react';
+import { ArrowLeft, Sun, Moon, Globe } from 'lucide-react';
+import { useLocale, translations } from '@/components/locale-provider';
 
 const SKILLS = [
-  { category: 'Linguagens', items: ['C#', '.NET Core', 'Kotlin', 'Python', 'JavaScript', 'Node.js'] },
-  { category: 'Frontend', items: ['Angular', 'React', 'HTML/CSS', 'Tailwind CSS'] },
-  { category: 'Cloud & Infra', items: ['Docker', 'Kubernetes', 'Azure', 'AWS', 'Computação em Nuvem'] },
-  { category: 'Arquitetura', items: ['Microsserviços', 'Event Driven', 'CQRS', 'DDD', 'SOLID', 'Clean Code'] },
-  { category: 'Banco de Dados', items: ['SQL Server', 'NoSQL', 'Redis', 'ELK'] },
-  { category: 'Metodologias', items: ['Agile', 'TDD', 'BDD', 'DevOps', 'CI/CD'] },
-  { category: 'Segurança', items: ['Azure Vault', 'PCI DSS', 'OWASP'] },
-  { category: 'Outros', items: ['Git', 'APIs RESTful', 'Mensageria', 'Design Patterns'] },
+  { category: 'languages', items: ['C#', '.NET Core', 'Kotlin', 'Python', 'JavaScript', 'Node.js'] },
+  { category: 'frontend', items: ['Angular', 'React', 'HTML/CSS', 'Tailwind CSS'] },
+  { category: 'cloudInfra', items: ['Docker', 'Kubernetes', 'Azure', 'AWS', 'Cloud Computing'] },
+  { category: 'architecture', items: ['Microservices', 'Event Driven', 'CQRS', 'DDD', 'SOLID', 'Clean Code'] },
+  { category: 'database', items: ['SQL Server', 'NoSQL', 'Redis', 'ELK'] },
+  { category: 'methodologies', items: ['Agile', 'TDD', 'BDD', 'DevOps', 'CI/CD'] },
+  { category: 'security', items: ['Azure Vault', 'PCI DSS', 'OWASP'] },
+  { category: 'others', items: ['Git', 'RESTful APIs', 'Messaging', 'Design Patterns'] },
 ];
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -36,9 +37,17 @@ function useMounted() {
 
 export default function Habilidades() {
   const { theme, setTheme } = useTheme();
+  const { locale, setLocale } = useLocale();
+  const t = translations[locale];
   const mounted = useMounted();
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const toggleLocale = () => {
+    setLocale(locale === 'pt-BR' ? 'en' : 'pt-BR');
+  };
+
+  const skillsText = t.skills.categories;
 
   return (
     <div className="min-h-screen transition-colors">
@@ -48,8 +57,16 @@ export default function Habilidades() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Back
+              {t.common.back}
             </Link>
+            <button
+              onClick={toggleLocale}
+              className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
+              aria-label="Toggle language"
+            >
+              <Globe className="w-4 h-4" />
+              {locale === 'pt-BR' ? 'PT' : 'EN'}
+            </button>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
@@ -64,8 +81,8 @@ export default function Habilidades() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Technical Skills</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Technologies and competencies</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.skills.title}</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">{t.skills.subtitle}</p>
           </FadeIn>
         </motion.div>
       </section>
@@ -79,7 +96,7 @@ export default function Habilidades() {
                   whileHover={{ scale: 1.02 }}
                   className="p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/30 transition-all"
                 >
-                  <h3 className="font-medium mb-3 text-blue-600 dark:text-blue-400">{skill.category}</h3>
+                  <h3 className="font-medium mb-3 text-blue-600 dark:text-blue-400">{skillsText[skill.category as keyof typeof skillsText]}</h3>
                   <div className="flex flex-wrap gap-2">
                     {skill.items.map((item, itemIndex) => (
                       <span

@@ -4,30 +4,11 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { BookOpen, Sun, Moon, ArrowLeft } from 'lucide-react';
+import { BookOpen, Sun, Moon, ArrowLeft, Globe } from 'lucide-react';
+import { useLocale, translations } from '@/components/locale-provider';
 
-const BOOKS = [
-  {
-    title: 'Designing Data-Intensive Applications',
-    author: 'Martin Kleppmann',
-    category: 'Engenharia de Software',
-  },
-  {
-    title: 'The Pragmatic Programmer',
-    author: 'David Thomas & Andrew Hunt',
-    category: 'Carreira',
-  },
-  {
-    title: 'Clean Code',
-    author: 'Robert C. Martin',
-    category: 'Boas Práticas',
-  },
-  {
-    title: 'System Design Interview',
-    author: 'Alex Xu',
-    category: 'Arquitetura',
-  },
-];
+const BOOKS_KEYS = ['ddia', 'pragmatic', 'cleanCode', 'systemDesign'];
+const BOOK_CATEGORIES = ['software', 'pragmatic', 'bestPractices', 'architecture'];
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -48,9 +29,18 @@ function useMounted() {
 
 export default function Livros() {
   const { theme, setTheme } = useTheme();
+  const { locale, setLocale } = useLocale();
+  const t = translations[locale];
   const mounted = useMounted();
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const toggleLocale = () => {
+    setLocale(locale === 'pt-BR' ? 'en' : 'pt-BR');
+  };
+
+  const booksList = t.books.booksList as Record<string, { title: string; author: string }>;
+  const categories = t.books.categories as Record<string, string>;
 
   return (
     <div className="min-h-screen transition-colors">
@@ -60,8 +50,16 @@ export default function Livros() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Back
+              {t.common.back}
             </Link>
+            <button
+              onClick={toggleLocale}
+              className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
+              aria-label="Toggle language"
+            >
+              <Globe className="w-4 h-4" />
+              {locale === 'pt-BR' ? 'PT' : 'EN'}
+            </button>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
@@ -76,8 +74,8 @@ export default function Livros() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Recommended Books</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Books that shaped my career</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.books.title}</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">{t.books.subtitle}</p>
           </FadeIn>
         </motion.div>
       </section>
@@ -85,20 +83,23 @@ export default function Livros() {
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-4">
-            {BOOKS.map((book, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/30 transition-all">
-                  <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
-                    <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            {BOOKS_KEYS.map((key, index) => {
+              const book = booksList[key];
+              return (
+                <FadeIn key={index} delay={index * 0.1}>
+                  <div className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/30 transition-all">
+                    <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                      <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">{book.title}</h3>
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400">{book.author}</p>
+                      <span className="text-xs text-blue-600 dark:text-blue-400">{categories[BOOK_CATEGORIES[index]]}</span>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold">{book.title}</h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">{book.author}</p>
-                    <span className="text-xs text-blue-600 dark:text-blue-400">{book.category}</span>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </section>

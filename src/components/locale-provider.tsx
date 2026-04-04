@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable react-hooks/set-state-in-effect */
 import { createContext, useContext, useState, useEffect, ReactNode, Suspense } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
@@ -8,6 +9,7 @@ type Locale = 'en' | 'pt-BR';
 interface LocaleContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
+  mounted: boolean;
 }
 
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
@@ -20,13 +22,13 @@ function LocaleContent({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    setMounted(true);
-    const localeParam = searchParams.get('locale');
+    const params = searchParams.toString();
+    const urlParams = new URLSearchParams(params);
+    const localeParam = urlParams.get('locale');
     if (localeParam === 'en') {
       setLocaleState('en');
-    } else {
-      setLocaleState('pt-BR');
     }
+    setMounted(true);
   }, [searchParams]);
 
   const setLocale = (newLocale: Locale) => {
@@ -39,7 +41,7 @@ function LocaleContent({ children }: { children: ReactNode }) {
   };
 
   return (
-    <LocaleContext.Provider value={{ locale: mounted ? locale : 'pt-BR', setLocale }}>
+    <LocaleContext.Provider value={{ locale: mounted ? locale : 'pt-BR', setLocale, mounted }}>
       {children}
     </LocaleContext.Provider>
   );
@@ -59,7 +61,78 @@ export function useLocale() {
   return context;
 }
 
-export const translations = {
+interface Translations {
+  nav: {
+    about: string;
+    projects: string;
+    publications: string;
+    experience: string;
+    skills: string;
+    books: string;
+    education: string;
+    contact: string;
+  };
+  hero: {
+    role: string;
+    description: string;
+    contact: string;
+    viewExperience: string;
+  };
+  contact: {
+    title: string;
+    subtitle: string;
+    location: string;
+  };
+  experience: {
+    title: string;
+    subtitle: string;
+  };
+  projectsPage: {
+    title: string;
+    subtitle: string;
+    viewProject: string;
+  };
+  skills: {
+    title: string;
+    subtitle: string;
+    categories: Record<string, string>;
+  };
+  books: {
+    title: string;
+    subtitle: string;
+    categories: Record<string, string>;
+    booksList: Record<string, { title: string; author: string }>;
+  };
+  education: {
+    title: string;
+    subtitle: string;
+    educationTitle: string;
+    awardsTitle: string;
+    education: { institution: string; degree: string; period: string }[];
+  };
+  publications: {
+    title: string;
+    subtitle: string;
+    readMore: string;
+    list: { title: string; description: string; link: string }[];
+  };
+  common: {
+    back: string;
+  };
+  experiences: {
+    company: string;
+    roles: { title: string; period: string; description: string }[];
+  }[];
+  projects: {
+    title: string;
+    description: string;
+    tech: string[];
+    link: string;
+  }[];
+  awards: string[];
+}
+
+export const translations: Record<Locale, Translations> = {
   'pt-BR': {
     nav: {
       about: 'Sobre',
@@ -94,21 +167,51 @@ export const translations = {
     skills: {
       title: 'Habilidades Técnicas',
       subtitle: 'Tecnologias e competências',
+      categories: {
+        languages: 'Linguagens',
+        frontend: 'Frontend',
+        cloudInfra: 'Cloud & Infra',
+        architecture: 'Arquitetura',
+        database: 'Banco de Dados',
+        methodologies: 'Metodologias',
+        security: 'Segurança',
+        others: 'Outros',
+      },
     },
     books: {
       title: 'Livros Recomendados',
       subtitle: 'Livros que marcaram minha trajetória',
+      categories: {
+        software: 'Engenharia de Software',
+        career: 'Carreira',
+        bestPractices: 'Boas Práticas',
+        architecture: 'Arquitetura',
+      },
+      booksList: {
+        ddia: { title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann' },
+        pragmatic: { title: 'The Pragmatic Programmer', author: 'David Thomas & Andrew Hunt' },
+        cleanCode: { title: 'Clean Code', author: 'Robert C. Martin' },
+        systemDesign: { title: 'System Design Interview', author: 'Alex Xu' },
+      },
     },
     education: {
       title: 'Formação e Premiações',
       subtitle: 'Educação e reconhecimentos',
       educationTitle: 'Formação Acadêmica',
       awardsTitle: 'Premiações',
+      education: [
+        { institution: 'Universidade Anhembi Morumbi', degree: 'Pós-Graduação em Desenvolvimento de Software com Metodologias Ágeis', period: '2020 - 2021' },
+        { institution: 'Faculdades Oswaldo Cruz', degree: 'Tecnólogo em Sistemas de Informação', period: '2005 - 2007' },
+      ],
     },
     publications: {
       title: 'Publicações',
       subtitle: 'Artigos e conteúdos técnicos que compartilhei',
       readMore: 'Ler publicação',
+      list: [
+        { title: 'Arquitetura de Microserviços na Prática', description: 'Guia completo sobre design e implementação de sistemas distribuídos.', link: '#' },
+        { title: 'Kubernetes: Do Básico ao Produção', description: 'Como escalar aplicações com containers em ambientes enterprise.', link: '#' },
+      ],
     },
     common: {
       back: 'Voltar',
@@ -238,21 +341,51 @@ export const translations = {
     skills: {
       title: 'Technical Skills',
       subtitle: 'Technologies and competencies',
+      categories: {
+        languages: 'Languages',
+        frontend: 'Frontend',
+        cloudInfra: 'Cloud & Infra',
+        architecture: 'Architecture',
+        database: 'Database',
+        methodologies: 'Methodologies',
+        security: 'Security',
+        others: 'Others',
+      },
     },
     books: {
       title: 'Recommended Books',
       subtitle: 'Books that shaped my career',
+      categories: {
+        software: 'Software Engineering',
+        career: 'Career',
+        bestPractices: 'Best Practices',
+        architecture: 'Architecture',
+      },
+      booksList: {
+        ddia: { title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann' },
+        pragmatic: { title: 'The Pragmatic Programmer', author: 'David Thomas & Andrew Hunt' },
+        cleanCode: { title: 'Clean Code', author: 'Robert C. Martin' },
+        systemDesign: { title: 'System Design Interview', author: 'Alex Xu' },
+      },
     },
     education: {
       title: 'Education & Awards',
       subtitle: 'Education and recognitions',
       educationTitle: 'Education',
       awardsTitle: 'Awards',
+      education: [
+        { institution: 'Universidade Anhembi Morumbi', degree: 'Postgraduate in Software Development with Agile Methodologies', period: '2020 - 2021' },
+        { institution: 'Faculdades Oswaldo Cruz', degree: 'Technology Degree in Information Systems', period: '2005 - 2007' },
+      ],
     },
     publications: {
       title: 'Publications',
       subtitle: 'Technical articles and content I have shared',
       readMore: 'Read publication',
+      list: [
+        { title: 'Practical Microservices Architecture', description: 'Complete guide to designing and implementing distributed systems.', link: '#' },
+        { title: 'Kubernetes: From Basics to Production', description: 'How to scale applications with containers in enterprise environments.', link: '#' },
+      ],
     },
     common: {
       back: 'Back',

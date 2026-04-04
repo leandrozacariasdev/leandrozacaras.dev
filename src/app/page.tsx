@@ -9,171 +9,15 @@ import { Mail, MapPin, ExternalLink, ArrowDown, Sun, Moon, Globe } from 'lucide-
 import { LinkedInIcon } from '@/components/icons';
 import { useLocale, translations } from '@/components/locale-provider';
 
-const EXPERIENCES = [
-  {
-    company: 'Creditas',
-    roles: [
-      {
-        title: 'Engineering Manager',
-        period: 'Nov 2025 - Present',
-        description: 'Technical leadership and team management.',
-      },
-      {
-        title: 'Engineering Lead',
-        period: 'Feb 2022 - Nov 2025',
-        description: 'Technical leadership in development team.',
-      },
-    ],
-  },
-  {
-    company: 'Bom Pra Crédito',
-    roles: [
-      {
-        title: 'Tech Lead',
-        period: 'Oct 2020 - Feb 2022',
-        description: 'Technical leadership in fintech projects.',
-      },
-    ],
-  },
-  {
-    company: 'Grupo Flytour',
-    roles: [
-      {
-        title: 'Development Coordinator',
-        period: 'Apr 2018 - Sep 2020',
-        description:
-          'Identifying opportunities and improvements in the development cycle; Defining architecture of new systems; Code review, monitoring and guidance of the team.',
-      },
-      {
-        title: 'Senior Development Analyst',
-        period: 'Feb 2015 - Apr 2018',
-        description:
-          'Migration of legacy monolithic systems to cloud distributed platform; Development of centralized Node.js CMS platform.',
-      },
-    ],
-  },
-  {
-    company: 'Ventron',
-    roles: [
-      {
-        title: 'Senior Development Analyst',
-        period: 'Jan 2013 - Jan 2015',
-        description: 'Systems development for Livraria Saraiva, Vivo, Grupo CRM and Grupo Flytour.',
-      },
-    ],
-  },
-  {
-    company: 'Deal',
-    roles: [
-      {
-        title: 'Senior Development Analyst',
-        period: 'Jul 2012 - Dec 2012',
-        description: 'Legacy migration from Power Builder to .NET for Itaú BBA.',
-      },
-      {
-        title: 'System Analyst',
-        period: 'Apr 2010 - Aug 2010',
-        description: 'Legacy migration from Banco BMC to Bradesco.',
-      },
-    ],
-  },
-  {
-    company: 'Banco Cruzeiro do Sul',
-    roles: [
-      {
-        title: 'Development Analyst',
-        period: 'Sep 2010 - Jun 2012',
-        description: 'Loan proposal processing and service management system for credit card module.',
-      },
-    ],
-  },
-  {
-    company: 'BSA Brasil',
-    roles: [
-      {
-        title: 'Full Stack Engineer',
-        period: 'Jun 2008 - Mar 2010',
-        description: 'Credit portal maintenance and SOA migration in .NET WCF.',
-      },
-    ],
-  },
-  {
-    company: 'Teia Advertising and Marketing',
-    roles: [
-      {
-        title: 'Full Stack Web Developer',
-        period: 'Oct 2007 - May 2008',
-        description: 'Web development.',
-      },
-    ],
-  },
-  {
-    company: 'Sweda Automação',
-    roles: [
-      {
-        title: 'Information Technology Intern',
-        period: 'Oct 2006 - Aug 2007',
-        description: 'IT internship.',
-      },
-    ],
-  },
-];
-
 const SKILLS = [
-  { category: 'Linguagens', items: ['C#', '.NET Core', 'Kotlin', 'Python', 'JavaScript', 'Node.js'] },
-  { category: 'Frontend', items: ['Angular', 'React', 'HTML/CSS', 'Tailwind CSS'] },
-  { category: 'Cloud & Infra', items: ['Docker', 'Kubernetes', 'Azure', 'AWS', 'Computação em Nuvem'] },
-  { category: 'Arquitetura', items: ['Microsserviços', 'Event Driven', 'CQRS', 'DDD', 'SOLID', 'Clean Code'] },
-  { category: 'Banco de Dados', items: ['SQL Server', 'NoSQL', 'Redis', 'ELK'] },
-  { category: 'Metodologias', items: ['Agile', 'TDD', 'BDD', 'DevOps', 'CI/CD'] },
-  { category: 'Segurança', items: ['Azure Vault', 'PCI DSS', 'OWASP'] },
-  { category: 'Outros', items: ['Git', 'APIs RESTful', 'Mensageria', 'Design Patterns'] },
-];
-
-const EDUCATION = [
-  {
-    institution: 'Universidade Anhembi Morumbi',
-    degree: 'Pós-Graduação em Desenvolvimento de Software com Metodologias Ágeis',
-    period: '2020 - 2021',
-  },
-  {
-    institution: 'Faculdades Oswaldo Cruz',
-    degree: 'Tecnólogo em Sistemas de Informação',
-    period: '2005 - 2007',
-  },
-];
-
-const PROJECTS = [
-  {
-    title: 'Portal de Crédito Consignado',
-    description: 'Plataforma completa para captação de propostas de crédito consignado com integração SOA.',
-    tech: ['.NET', 'WCF', 'SQL Server'],
-    link: '#',
-  },
-  {
-    title: 'CMS Corporate',
-    description: 'Plataforma CMS centralizada em Node.js para substituição de todos os sites e portais da companhia.',
-    tech: ['Node.js', 'Angular', 'MongoDB'],
-    link: '#',
-  },
-  {
-    title: 'Plataforma de Viagens',
-    description: 'Sistema de reservas e gestão de viagens com microsserviços e arquitetura distribuída.',
-    tech: ['Kubernetes', 'Azure', 'React'],
-    link: '#',
-  },
-  {
-    title: 'Sistema de Crédito Bom Pra Crédito',
-    description: 'Plataforma fintech para análise e concessão de crédito com Scoring Sphinx.',
-    tech: ['.NET Core', 'Kafka', 'PostgreSQL'],
-    link: '#',
-  },
-];
-
-const AWARDS = [
-  'Prêmio de profissional de destaque da área de tecnologia',
-  '3º Lugar - 1º Hackathon Viagens (44ª ABAV Expo Internacional)',
-  '1º Lugar - Hackathon Flytour em parceria com a Microsoft',
+  { category: 'languages', items: ['C#', '.NET Core', 'Kotlin', 'Python', 'JavaScript', 'Node.js'] },
+  { category: 'frontend', items: ['Angular', 'React', 'HTML/CSS', 'Tailwind CSS'] },
+  { category: 'cloudInfra', items: ['Docker', 'Kubernetes', 'Azure', 'AWS', 'Cloud Computing'] },
+  { category: 'architecture', items: ['Microservices', 'Event Driven', 'CQRS', 'DDD', 'SOLID', 'Clean Code'] },
+  { category: 'database', items: ['SQL Server', 'NoSQL', 'Redis', 'ELK'] },
+  { category: 'methodologies', items: ['Agile', 'TDD', 'BDD', 'DevOps', 'CI/CD'] },
+  { category: 'security', items: ['Azure Vault', 'PCI DSS', 'OWASP'] },
+  { category: 'others', items: ['Git', 'RESTful APIs', 'Messaging', 'Design Patterns'] },
 ];
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -188,8 +32,6 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     </motion.div>
   );
 }
-
-
 
 function useMounted() {
   const [mounted, setMounted] = useState(false);
@@ -219,10 +61,12 @@ export default function Home() {
   const navLabels = t.nav;
   const heroText = t.hero;
   const contactText = t.contact;
+  const projectsText = t.projectsPage;
+  const skillsText = t.skills.categories;
+  const educationText = t.education;
 
   return (
     <div className="min-h-screen transition-colors">
-      {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800">
         <nav className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</Link>
@@ -259,15 +103,12 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      {/* Hero Section with Parallax */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-blue-50 dark:from-blue-900 dark:via-zinc-900 dark:to-zinc-950">
           <div className="absolute inset-0 opacity-30 dark:opacity-30">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-300/30 dark:bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/30 dark:bg-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
           </div>
-          {/* Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
         </div>
 
@@ -336,7 +177,6 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -353,14 +193,13 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Awards Section with Stagger */}
       <section className="py-20 px-4 bg-zinc-50 dark:bg-white dark:bg-zinc-900">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-8 text-center">Premiações</h2>
+            <h2 className="text-3xl font-semibold mb-8 text-center">{educationText.awardsTitle}</h2>
           </FadeIn>
           <div className="grid gap-4">
-            {AWARDS.map((award, index) => (
+            {t.awards.map((award, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <div className="flex items-center gap-4 p-4 bg-zinc-50 dark:bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-colors">
                   <div className="w-2 h-2 rounded-full bg-blue-500" />
@@ -372,15 +211,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section id="projetos" className="py-20 px-4 scroll-mt-24">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-4 text-center">Projetos</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-12">Projetos que demonstrem minha experiência e habilidades técnicas</p>
+            <h2 className="text-3xl font-semibold mb-4 text-center">{projectsText.title}</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-12">{projectsText.subtitle}</p>
           </FadeIn>
           <div className="grid md:grid-cols-2 gap-6">
-            {PROJECTS.map((project, index) => (
+            {t.projects.map((project, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <motion.div
                   whileHover={{ scale: 1.02 }}
@@ -402,7 +240,7 @@ export default function Home() {
                     className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    Ver projeto
+                    {projectsText.viewProject}
                   </a>
                 </motion.div>
               </FadeIn>
@@ -411,17 +249,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Section */}
       <section id="experiencia" className="py-20 px-4 bg-white dark:bg-zinc-100 dark:bg-zinc-900/30 scroll-mt-24">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-12 text-center">Experiência Profissional</h2>
+            <h2 className="text-3xl font-semibold mb-12 text-center">{t.experience.title}</h2>
           </FadeIn>
           <div className="relative">
-            {/* Timeline Line */}
             <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 to-blue-800" />
             
-            {EXPERIENCES.map((exp, index) => (
+            {t.experiences.map((exp, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <div className={`relative flex gap-8 mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                   <div className="hidden md:block md:w-1/2" />
@@ -445,11 +281,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills Section */}
       <section id="habilidades" className="py-20 px-4 scroll-mt-24">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-12 text-center">Habilidades Técnicas</h2>
+            <h2 className="text-3xl font-semibold mb-12 text-center">{t.skills.title}</h2>
           </FadeIn>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {SKILLS.map((skill, index) => (
@@ -458,7 +293,7 @@ export default function Home() {
                   whileHover={{ scale: 1.02 }}
                   className="p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/30 transition-all"
                 >
-                  <h3 className="font-medium mb-3 text-blue-600 dark:text-blue-400">{skill.category}</h3>
+                  <h3 className="font-medium mb-3 text-blue-600 dark:text-blue-400">{skillsText[skill.category as keyof typeof skillsText]}</h3>
                   <div className="flex flex-wrap gap-2">
                     {skill.items.map((item, itemIndex) => (
                       <span
@@ -476,14 +311,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Education Section */}
       <section id="formacao" className="py-20 px-4 bg-white dark:bg-zinc-100 dark:bg-zinc-900/30 scroll-mt-24">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-12 text-center">Formação Acadêmica</h2>
+            <h2 className="text-3xl font-semibold mb-12 text-center">{educationText.educationTitle}</h2>
           </FadeIn>
           <div className="space-y-6">
-            {EDUCATION.map((edu, index) => (
+            {educationText.education.map((edu, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <div className="flex gap-4 items-start">
                   <div className="w-3 h-3 mt-2 rounded-full bg-blue-600 flex-shrink-0" />
@@ -499,7 +333,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contato" className="py-20 px-4 scroll-mt-24">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
@@ -537,9 +370,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-8 text-center text-sm text-zinc-500 border-t border-zinc-800">
-        <p>© {new Date().getFullYear()} Leandro Zacarias. Todos os direitos reservados.</p>
+        <p>© {new Date().getFullYear()} Leandro Zacarias. {locale === 'pt-BR' ? 'Todos os direitos reservados.' : 'All rights reserved.'}</p>
       </footer>
     </div>
   );
