@@ -5,8 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Mail, MapPin, ExternalLink, ArrowDown, Sun, Moon } from 'lucide-react';
-import { LinkedInIcon, GithubIcon } from '@/components/icons';
+import { Mail, MapPin, ExternalLink, ArrowDown, Sun, Moon, Globe } from 'lucide-react';
+import { LinkedInIcon } from '@/components/icons';
+import { useLocale } from '@/components/locale-provider';
 
 const EXPERIENCES = [
   {
@@ -14,13 +15,13 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Engineering Manager',
-        period: 'nov. 2025 - atual',
-        description: 'Liderança técnica e gestão de equipe de engenharia.',
+        period: 'Nov 2025 - Present',
+        description: 'Technical leadership and team management.',
       },
       {
         title: 'Engineering Lead',
-        period: 'fev. 2022 - nov. 2025',
-        description: 'Liderança técnica em equipe de desenvolvimento.',
+        period: 'Feb 2022 - Nov 2025',
+        description: 'Technical leadership in development team.',
       },
     ],
   },
@@ -29,8 +30,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Tech Lead',
-        period: 'out. 2020 - fev. 2022',
-        description: 'Liderança técnica em projetos de tecnologia financeira.',
+        period: 'Oct 2020 - Feb 2022',
+        description: 'Technical leadership in fintech projects.',
       },
     ],
   },
@@ -38,16 +39,16 @@ const EXPERIENCES = [
     company: 'Grupo Flytour',
     roles: [
       {
-        title: 'Coordenador de desenvolvimento',
-        period: 'abr. 2018 - set. 2020',
+        title: 'Development Coordinator',
+        period: 'Apr 2018 - Sep 2020',
         description:
-          'Identificação de oportunidades e melhorias no ciclo de desenvolvimento; Definição da arquitetura de novos sistemas; Code review, monitoramento e direcionamento do time. Realização de entrevistas técnicas e novas contratações; Feedback periódico; Referência técnica e conhecimento profundo do negócio; Onboarding de clientes internacionais.',
+          'Identifying opportunities and improvements in the development cycle; Defining architecture of new systems; Code review, monitoring and guidance of the team.',
       },
       {
         title: 'Senior Development Analyst',
-        period: 'fev. 2015 - abr. 2018',
+        period: 'Feb 2015 - Apr 2018',
         description:
-          'Migração dos sistemas legados monolíticos para plataforma distribuída em nuvem; Desenvolvimento de plataforma CMS centralizada em Node.js para substituição de todos os sites e portais da companhia.',
+          'Migration of legacy monolithic systems to cloud distributed platform; Development of centralized Node.js CMS platform.',
       },
     ],
   },
@@ -56,8 +57,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Senior Development Analyst',
-        period: 'jan. 2013 - jan. 2015',
-        description: 'Atuando como Analista de Desenvolvimento de Sistemas em projetos dos clientes: Livraria Saraiva, Vivo, Grupo CRM e Grupo Flytour.',
+        period: 'Jan 2013 - Jan 2015',
+        description: 'Systems development for Livraria Saraiva, Vivo, Grupo CRM and Grupo Flytour.',
       },
     ],
   },
@@ -66,13 +67,13 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Senior Development Analyst',
-        period: 'jul. 2012 - dez. 2012',
-        description: 'Migração de legado em Power Builder para plataforma .NET do Banco Itaú BBA.',
+        period: 'Jul 2012 - Dec 2012',
+        description: 'Legacy migration from Power Builder to .NET for Itaú BBA.',
       },
       {
         title: 'System Analyst',
-        period: 'abr. 2010 - ago. 2010',
-        description: 'Migração de dados e sistemas legados do Banco BMC, adquirido pelo Bradesco.',
+        period: 'Apr 2010 - Aug 2010',
+        description: 'Legacy migration from Banco BMC to Bradesco.',
       },
     ],
   },
@@ -81,8 +82,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Development Analyst',
-        period: 'set. 2010 - jun. 2012',
-        description: 'Melhorias nos processos de captação e processamento de propostas de empréstimos consignados junto à Dataprev. Implantação do sistema gerenciador de serviços para operacionalização de solicitações de saque, seguro, cartão adicional e 2ª via de cartão no módulo de cartão consignado.',
+        period: 'Sep 2010 - Jun 2012',
+        description: 'Loan proposal processing and service management system for credit card module.',
       },
     ],
   },
@@ -91,8 +92,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Full Stack Engineer',
-        period: 'jun. 2008 - mar. 2010',
-        description: 'Sustentação do portal de captação de propostas de crédito consignado do Banco Cruzeiro do Sul e dos sites institucionais da corretora de valores Apregoa e do FIDC BCSul Verax Crédito Consignado. Migração de regras de negócios para arquitetura SOA em .NET WCF.',
+        period: 'Jun 2008 - Mar 2010',
+        description: 'Credit portal maintenance and SOA migration in .NET WCF.',
       },
     ],
   },
@@ -101,8 +102,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Full Stack Web Developer',
-        period: 'out. 2007 - mai. 2008',
-        description: 'Desenvolvimento web.',
+        period: 'Oct 2007 - May 2008',
+        description: 'Web development.',
       },
     ],
   },
@@ -111,8 +112,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Information Technology Intern',
-        period: 'out. 2006 - ago. 2007',
-        description: 'Estágio em tecnologia da informação.',
+        period: 'Oct 2006 - Aug 2007',
+        description: 'IT internship.',
       },
     ],
   },
@@ -198,6 +199,7 @@ function useMounted() {
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
+  const { locale, setLocale } = useLocale();
   const mounted = useMounted();
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -205,8 +207,24 @@ export default function Home() {
     offset: ['start start', 'end start'],
   });
 
+  const toggleLocale = () => {
+    setLocale(locale === 'pt-BR' ? 'en' : 'pt-BR');
+  };
+
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const navLabels = locale === 'pt-BR' 
+    ? { about: 'Sobre', projects: 'Projetos', publications: 'Publicações', experience: 'Experiência', skills: 'Habilidades', books: 'Livros', education: 'Formação', contact: 'Contato' }
+    : { about: 'About', projects: 'Projects', publications: 'Publications', experience: 'Experience', skills: 'Skills', books: 'Books', education: 'Education', contact: 'Contact' };
+
+  const heroText = locale === 'pt-BR'
+    ? { description: '20+ anos de experiência em tecnologia. Especializado em sistemas distribuídos, design de sistemas e liderança de equipes de engenharia.', contact: 'Entre em contato', viewExperience: 'Ver experiência' }
+    : { description: '20+ years of experience in technology. Specialized in distributed systems, software design and engineering team leadership.', contact: 'Contact me', viewExperience: 'View experience' };
+
+  const contactText = locale === 'pt-BR'
+    ? { title: 'Vamos conversar?', subtitle: 'Entre em contato para conversas sobre tecnologia', location: 'São Paulo, SP - Brasil' }
+    : { title: "Let's talk?", subtitle: 'Get in touch for conversations about technology', location: 'São Paulo, SP - Brazil' };
 
   return (
     <div className="min-h-screen transition-colors">
@@ -215,14 +233,21 @@ export default function Home() {
         <nav className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</Link>
           <div className="flex gap-6 items-center text-sm">
-            <Link href="/sobre" className="hover:text-blue-600 transition-colors">Sobre</Link>
-            <Link href="/projetos" className="hover:text-blue-600 transition-colors">Projetos</Link>
-            <Link href="/publicacoes" className="hover:text-blue-600 transition-colors">Publicações</Link>
-            <Link href="/experiencia" className="hover:text-blue-600 transition-colors">Experiência</Link>
-            <Link href="/habilidades" className="hover:text-blue-600 transition-colors">Habilidades</Link>
-            <Link href="/livros" className="hover:text-blue-600 transition-colors">Livros</Link>
-            <Link href="/formacao" className="hover:text-blue-600 transition-colors">Formação</Link>
-            <Link href="/#contato" className="hover:text-blue-600 transition-colors">Contato</Link>
+            <Link href="/sobre" className="hover:text-blue-600 transition-colors">{navLabels.about}</Link>
+            <Link href="/projetos" className="hover:text-blue-600 transition-colors">{navLabels.projects}</Link>
+            <Link href="/publicacoes" className="hover:text-blue-600 transition-colors">{navLabels.publications}</Link>
+            <Link href="/experiencia" className="hover:text-blue-600 transition-colors">{navLabels.experience}</Link>
+            <Link href="/habilidades" className="hover:text-blue-600 transition-colors">{navLabels.skills}</Link>
+            <Link href="/livros" className="hover:text-blue-600 transition-colors">{navLabels.books}</Link>
+            <Link href="/formacao" className="hover:text-blue-600 transition-colors">{navLabels.education}</Link>
+            <Link href="/#contato" className="hover:text-blue-600 transition-colors">{navLabels.contact}</Link>
+            <button
+              onClick={toggleLocale}
+              className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              aria-label="Toggle language"
+            >
+              <Globe className="w-5 h-5" />
+            </button>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
@@ -292,8 +317,7 @@ export default function Home() {
             transition={{ delay: 0.6 }}
             className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-8"
           >
-            20+ anos de experiência em tecnologia. Especializado em sistemas distribuídos, 
-            design de sistemas e liderança de equipes de engenharia.
+            {heroText.description}
           </motion.p>
 
           <motion.div
@@ -303,23 +327,17 @@ export default function Home() {
             className="flex gap-4 justify-center flex-wrap"
           >
             <a
-              href="https://linkedin.com/in/leandrozacarias"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              href="mailto:me@leandrozacarias.dev"
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              <LinkedInIcon className="w-5 h-5" aria-hidden="true" />
-              LinkedIn
+              {heroText.contact}
             </a>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-700 text-zinc-300 rounded-full hover:bg-zinc-800 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+            <Link
+              href="/experiencia"
+              className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg hover:border-blue-500 transition-colors"
             >
-              <GithubIcon className="w-5 h-5" aria-hidden="true" />
-              GitHub
-            </a>
+              {heroText.viewExperience}
+            </Link>
           </motion.div>
         </motion.div>
 
@@ -490,8 +508,8 @@ export default function Home() {
       <section id="contato" className="py-20 px-4 scroll-mt-24">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-4">Let&apos;s talk?</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-12">Entre em contato para conversas sobre tecnologia</p>
+            <h2 className="text-3xl font-semibold mb-4">{contactText.title}</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 mb-12">{contactText.subtitle}</p>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-4">
             <FadeIn delay={0.1}>
@@ -506,7 +524,7 @@ export default function Home() {
             <FadeIn delay={0.3}>
               <div className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800">
                 <MapPin className="text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>São Paulo, SP - Brasil</span>
+                <span>{contactText.location}</span>
               </div>
             </FadeIn>
             <FadeIn delay={0.4}>

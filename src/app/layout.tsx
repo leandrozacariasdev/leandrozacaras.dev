@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LocaleProvider } from "@/components/locale-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -54,9 +55,6 @@ export const metadata: Metadata = {
       "Software Engineer com 20+ anos de experiência. Especializado em sistemas distribuídos, design de sistemas e liderança de equipes de engenharia.",
     creator: "@leandrozacarias",
   },
-  verification: {
-    google: "google-site-verification-code",
-  },
 };
 
 export default function RootLayout({
@@ -67,7 +65,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className="antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>{children}</ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <LocaleProvider>
+            {children}
+          </LocaleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "publications": "Publications",
+    "experience": "Experience",
+    "skills": "Skills",
+    "books": "Books",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Leandro Zacarias",
+    "role": "Software Engineer",
+    "description": "20+ years of experience in technology. Specialized in distributed systems, software design and engineering team leadership.",
+    "contact": "Contact me",
+    "viewExperience": "View experience"
+  },
+  "contact": {
+    "title": "Let's talk?",
+    "subtitle": "Get in touch for conversations about technology",
+    "email": "me@leandrozacarias.dev",
+    "location": "São Paulo, SP - Brazil"
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "subtitle": "My career journey"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Projects that demonstrate my experience and technical skills",
+    "viewProject": "View project"
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "subtitle": "Technologies and competencies"
+  },
+  "books": {
+    "title": "Recommended Books",
+    "subtitle": "Books that shaped my career"
+  },
+  "education": {
+    "title": "Education & Awards",
+    "subtitle": "Education and recognitions",
+    "educationTitle": "Education",
+    "awardsTitle": "Awards"
+  },
+  "publications": {
+    "title": "Publications",
+    "subtitle": "Technical articles and content I have shared",
+    "readMore": "Read publication"
+  },
+  "about": {
+    "title": "About",
+    "back": "Back"
+  },
+  "common": {
+    "back": "Back"
+  }
+}
