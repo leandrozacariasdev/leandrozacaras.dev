@@ -14,21 +14,27 @@ const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
 function LocaleContent({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('pt-BR');
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    setMounted(true);
     const localeParam = searchParams.get('locale');
     if (localeParam === 'en') {
       setLocaleState('en');
     } else {
-      setLocaleState('pt-BR');
+      const stored = localStorage.getItem('locale') as Locale;
+      if (stored) {
+        setLocaleState(stored);
+      }
     }
   }, [searchParams]);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
+    localStorage.setItem('locale', newLocale);
     if (newLocale === 'en') {
       router.push(`${pathname}?locale=en`);
     } else {
@@ -37,7 +43,7 @@ function LocaleContent({ children }: { children: ReactNode }) {
   };
 
   return (
-    <LocaleContext.Provider value={{ locale, setLocale }}>
+    <LocaleContext.Provider value={{ locale: mounted ? locale : 'pt-BR', setLocale }}>
       {children}
     </LocaleContext.Provider>
   );

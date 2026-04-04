@@ -21,7 +21,8 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 function useMounted() {
-  const [mounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useState(() => setMounted(true));
   return mounted;
 }
 
