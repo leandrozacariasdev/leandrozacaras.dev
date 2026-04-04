@@ -227,13 +227,13 @@ export default function Home() {
         <nav className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</Link>
           <div className="flex gap-6 items-center text-sm">
-            <Link href="/sobre" className="hover:text-blue-600 transition-colors">{navLabels.about}</Link>
-            <Link href="/projetos" className="hover:text-blue-600 transition-colors">{navLabels.projects}</Link>
-            <Link href="/publicacoes" className="hover:text-blue-600 transition-colors">{navLabels.publications}</Link>
-            <Link href="/experiencia" className="hover:text-blue-600 transition-colors">{navLabels.experience}</Link>
-            <Link href="/habilidades" className="hover:text-blue-600 transition-colors">{navLabels.skills}</Link>
-            <Link href="/livros" className="hover:text-blue-600 transition-colors">{navLabels.books}</Link>
-            <Link href="/formacao" className="hover:text-blue-600 transition-colors">{navLabels.education}</Link>
+            <Link href="/about" className="hover:text-blue-600 transition-colors">{navLabels.about}</Link>
+            <Link href="/projects" className="hover:text-blue-600 transition-colors">{navLabels.projects}</Link>
+            <Link href="/publications" className="hover:text-blue-600 transition-colors">{navLabels.publications}</Link>
+            <Link href="/experience" className="hover:text-blue-600 transition-colors">{navLabels.experience}</Link>
+            <Link href="/skills" className="hover:text-blue-600 transition-colors">{navLabels.skills}</Link>
+            <Link href="/books" className="hover:text-blue-600 transition-colors">{navLabels.books}</Link>
+            <Link href="/education" className="hover:text-blue-600 transition-colors">{navLabels.education}</Link>
             <Link href="/#contato" className="hover:text-blue-600 transition-colors">{navLabels.contact}</Link>
             <button
               onClick={toggleLocale}
@@ -328,7 +328,7 @@ export default function Home() {
               {heroText.contact}
             </a>
             <Link
-              href="/experiencia"
+              href="/experience"
               className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg hover:border-blue-500 transition-colors"
             >
               {heroText.viewExperience}

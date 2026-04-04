@@ -110,7 +110,7 @@ export default function Sobre() {
                 {t.hero.contact}
               </a>
               <Link
-                href="/experiencia"
+                href="/experience"
                 className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg hover:border-blue-500 transition-colors"
               >
                 {t.hero.viewExperience}
