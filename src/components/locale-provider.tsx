@@ -25,16 +25,12 @@ function LocaleContent({ children }: { children: ReactNode }) {
     if (localeParam === 'en') {
       setLocaleState('en');
     } else {
-      const stored = localStorage.getItem('locale') as Locale;
-      if (stored) {
-        setLocaleState(stored);
-      }
+      setLocaleState('pt-BR');
     }
   }, [searchParams]);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
-    localStorage.setItem('locale', newLocale);
     if (newLocale === 'en') {
       router.push(`${pathname}?locale=en`);
     } else {
