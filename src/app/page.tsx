@@ -1,13 +1,13 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Mail, MapPin, ExternalLink, ArrowDown, Sun, Moon, Globe } from 'lucide-react';
+import { Mail, MapPin, ExternalLink, ArrowDown } from 'lucide-react';
 import { LinkedInIcon } from '@/components/icons';
 import { useLocale, translations } from '@/components/locale-provider';
+import Navbar from '@/components/navbar';
 
 const SKILLS = [
   { category: 'languages', items: ['C#', '.NET Core', 'Kotlin', 'Python', 'JavaScript', 'Node.js'] },
@@ -33,25 +33,13 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
-function useMounted() {
-  const [mounted, setMounted] = useState(false);
-  useState(() => setMounted(true));
-  return mounted;
-}
-
 export default function Home() {
-  const { theme, setTheme } = useTheme();
-  const { locale, setLocale } = useLocale();
-  const mounted = useMounted();
+  const { locale } = useLocale();
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
   });
-
-  const toggleLocale = () => {
-    setLocale(locale === 'pt-BR' ? 'en' : 'pt-BR');
-  };
 
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -67,42 +55,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen transition-colors">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800">
-        <nav className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</Link>
-          <div className="flex gap-6 items-center text-sm">
-            <Link href="/about" className="hover:text-blue-600 transition-colors">{navLabels.about}</Link>
-            <Link href="/projects" className="hover:text-blue-600 transition-colors">{navLabels.projects}</Link>
-            <Link href="/publications" className="hover:text-blue-600 transition-colors">{navLabels.publications}</Link>
-            <Link href="/experience" className="hover:text-blue-600 transition-colors">{navLabels.experience}</Link>
-            <Link href="/skills" className="hover:text-blue-600 transition-colors">{navLabels.skills}</Link>
-            <Link href="/books" className="hover:text-blue-600 transition-colors">{navLabels.books}</Link>
-            <Link href="/education" className="hover:text-blue-600 transition-colors">{navLabels.education}</Link>
-            <Link href="/#contato" className="hover:text-blue-600 transition-colors">{navLabels.contact}</Link>
-            <button
-              onClick={toggleLocale}
-              className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
-              aria-label="Toggle language"
-            >
-              <Globe className="w-4 h-4" />
-              {locale === 'pt-BR' ? 'PT' : 'EN'}
-            </button>
-            <button
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-              aria-label="Alternar tema"
-            >
-              {mounted && (
-                theme === 'light' ? (
-                  <Moon className="w-5 h-5" />
-                ) : (
-                  <Sun className="w-5 h-5" />
-                )
-              )}
-            </button>
-          </div>
-        </nav>
-      </header>
+      <Navbar />
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-blue-50 dark:from-blue-900 dark:via-zinc-900 dark:to-zinc-950">
           <div className="absolute inset-0 opacity-30 dark:opacity-30">
