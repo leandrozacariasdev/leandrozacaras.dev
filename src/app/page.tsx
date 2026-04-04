@@ -1,10 +1,10 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { Mail, MapPin, ExternalLink, ArrowDown, Sun, Moon } from 'lucide-react';
 import { LinkedInIcon, GithubIcon } from '@/components/icons';
 
@@ -41,13 +41,13 @@ const EXPERIENCES = [
         title: 'Coordenador de desenvolvimento',
         period: 'abr. 2018 - set. 2020',
         description:
-          'Identificação de oportunidades e melhorias no ciclo de desenvolvimento; Definição da arquitetura de novos sistemas; Code review, monitoramento e direcionamento do time.',
+          'Identificação de oportunidades e melhorias no ciclo de desenvolvimento; Definição da arquitetura de novos sistemas; Code review, monitoramento e direcionamento do time. Realização de entrevistas técnicas e novas contratações; Feedback periódico; Referência técnica e conhecimento profundo do negócio; Onboarding de clientes internacionais.',
       },
       {
         title: 'Senior Development Analyst',
         period: 'fev. 2015 - abr. 2018',
         description:
-          'Migração dos sistemas legados monolíticos para plataforma distribuída em nuvem; Desenvolvimento de plataforma CMS centralizada em Node.js.',
+          'Migração dos sistemas legados monolíticos para plataforma distribuída em nuvem; Desenvolvimento de plataforma CMS centralizada em Node.js para substituição de todos os sites e portais da companhia.',
       },
     ],
   },
@@ -62,12 +62,27 @@ const EXPERIENCES = [
     ],
   },
   {
+    company: 'Deal',
+    roles: [
+      {
+        title: 'Senior Development Analyst',
+        period: 'jul. 2012 - dez. 2012',
+        description: 'Migração de legado em Power Builder para plataforma .NET do Banco Itaú BBA.',
+      },
+      {
+        title: 'System Analyst',
+        period: 'abr. 2010 - ago. 2010',
+        description: 'Migração de dados e sistemas legados do Banco BMC, adquirido pelo Bradesco.',
+      },
+    ],
+  },
+  {
     company: 'Banco Cruzeiro do Sul',
     roles: [
       {
         title: 'Development Analyst',
         period: 'set. 2010 - jun. 2012',
-        description: 'Melhorias nos processos de captação e processamento de propostas de empréstimos consignados junto à Dataprev.',
+        description: 'Melhorias nos processos de captação e processamento de propostas de empréstimos consignados junto à Dataprev. Implantação do sistema gerenciador de serviços para operacionalização de solicitações de saque, seguro, cartão adicional e 2ª via de cartão no módulo de cartão consignado.',
       },
     ],
   },
@@ -77,7 +92,27 @@ const EXPERIENCES = [
       {
         title: 'Full Stack Engineer',
         period: 'jun. 2008 - mar. 2010',
-        description: 'Sustentação do portal de captação de propostas de crédito consignado; Migração para arquitetura SOA em .NET WCF.',
+        description: 'Sustentação do portal de captação de propostas de crédito consignado do Banco Cruzeiro do Sul e dos sites institucionais da corretora de valores Apregoa e do FIDC BCSul Verax Crédito Consignado. Migração de regras de negócios para arquitetura SOA em .NET WCF.',
+      },
+    ],
+  },
+  {
+    company: 'Teia Advertising and Marketing',
+    roles: [
+      {
+        title: 'Full Stack Web Developer',
+        period: 'out. 2007 - mai. 2008',
+        description: 'Desenvolvimento web.',
+      },
+    ],
+  },
+  {
+    company: 'Sweda Automação',
+    roles: [
+      {
+        title: 'Information Technology Intern',
+        period: 'out. 2006 - ago. 2007',
+        description: 'Estágio em tecnologia da informação.',
       },
     ],
   },
@@ -140,42 +175,6 @@ const AWARDS = [
   '1º Lugar - Hackathon Flytour em parceria com a Microsoft',
 ];
 
-const PUBLICATIONS = [
-  {
-    title: 'Arquitetura de Microserviços na Prática',
-    description: 'Guia completo sobre design e implementação de sistemas distribuídos.',
-    link: '#',
-  },
-  {
-    title: 'Kubernetes: Do Básico ao Produção',
-    description: 'Como escalar aplicações com containers em ambientes enterprise.',
-    link: '#',
-  },
-];
-
-const BOOKS = [
-  {
-    title: 'Designing Data-Intensive Applications',
-    author: 'Martin Kleppmann',
-    category: 'Engenharia de Software',
-  },
-  {
-    title: 'The Pragmatic Programmer',
-    author: 'David Thomas & Andrew Hunt',
-    category: 'Carreira',
-  },
-  {
-    title: 'Clean Code',
-    author: 'Robert C. Martin',
-    category: 'Boas Práticas',
-  },
-  {
-    title: 'System Design Interview',
-    author: 'Alex Xu',
-    category: 'Arquitetura',
-  },
-];
-
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -209,6 +208,24 @@ export default function Home() {
     offset: ['start start', 'end start'],
   });
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { damping: 25, stiffness: 150 };
+  const springX = useSpring(mouseX, springConfig);
+  const springY = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX / innerWidth - 0.5) * 2;
+      const y = (e.clientY / innerHeight - 0.5) * 2;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
@@ -221,10 +238,10 @@ export default function Home() {
           <div className="flex gap-6 items-center text-sm">
             <a href="#sobre" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Sobre</a>
             <a href="#projetos" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Projetos</a>
-            <a href="#publicacoes" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Publicações</a>
+            <Link href="/publicacoes" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Publicações</Link>
             <a href="#experiencia" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Experiência</a>
             <a href="#habilidades" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Habilidades</a>
-            <a href="#livros" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Livros</a>
+            <Link href="/livros" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Livros</Link>
             <a href="#formacao" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Formação</a>
             <a href="#contato" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Contato</a>
             <button
@@ -243,17 +260,29 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      {/* Hero Section with Parallax */}
+      {/* Hero Section with Parallax and Mouse Follow */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-blue-50 dark:from-blue-900 dark:via-zinc-900 dark:to-zinc-950">
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-blue-50 dark:from-blue-900 dark:via-zinc-900 dark:to-zinc-950"
+          style={{
+            x: springX,
+            y: springY,
+          }}
+        >
           <div className="absolute inset-0 opacity-30 dark:opacity-30">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-300/30 dark:bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/30 dark:bg-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <motion.div 
+              className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-300/30 dark:bg-blue-500/20 rounded-full blur-3xl"
+              style={{ x: springX, y: springY }}
+            />
+            <motion.div 
+              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/30 dark:bg-blue-600/20 rounded-full blur-3xl"
+              style={{ x: springX, y: springY }}
+            />
           </div>
           {/* Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
-        </div>
+        </motion.div>
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 text-center px-4">
           <motion.div
@@ -402,38 +431,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Publications Section */}
-      <section id="publicacoes" className="py-20 px-4 scroll-mt-24">
-        <div className="max-w-4xl mx-auto">
-          <FadeIn>
-            <h2 className="text-3xl font-semibold mb-4 text-center">Publicações</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-12">Artigos e conteúdos técnicos que compartilhei</p>
-          </FadeIn>
-          <div className="grid md:grid-cols-2 gap-6">
-            {PUBLICATIONS.map((pub, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="p-6 bg-white dark:bg-zinc-900 rounded-xl border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all"
-                >
-                  <h3 className="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">
-                    {pub.title}
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4">{pub.description}</p>
-                  <a
-                    href={pub.link}
-                    className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    Ler publicação
-                  </a>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Experience Section */}
       <section id="experiencia" className="py-20 px-4 bg-white dark:bg-zinc-100 dark:bg-zinc-900/30 scroll-mt-24">
         <div className="max-w-4xl mx-auto">
@@ -493,32 +490,6 @@ export default function Home() {
                     ))}
                   </div>
                 </motion.div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Books Section */}
-      <section id="livros" className="py-20 px-4 bg-white dark:bg-zinc-100 dark:bg-zinc-900/30 scroll-mt-24">
-        <div className="max-w-4xl mx-auto">
-          <FadeIn>
-            <h2 className="text-3xl font-semibold mb-4 text-center">Livros Recomendados</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-12">Livros que marcaram minha trajetória</p>
-          </FadeIn>
-          <div className="grid md:grid-cols-2 gap-4">
-            {BOOKS.map((book, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/30 transition-all">
-                  <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 dark:text-blue-400 text-xl">📚</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">{book.title}</h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">{book.author}</p>
-                    <span className="text-xs text-blue-600 dark:text-blue-400">{book.category}</span>
-                  </div>
-                </div>
               </FadeIn>
             ))}
           </div>
