@@ -7,7 +7,7 @@ import { useTheme } from 'next-themes';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, MapPin, ExternalLink, ArrowDown, Sun, Moon, Globe } from 'lucide-react';
 import { LinkedInIcon } from '@/components/icons';
-import { useLocale } from '@/components/locale-provider';
+import { useLocale, translations } from '@/components/locale-provider';
 
 const EXPERIENCES = [
   {
@@ -214,17 +214,11 @@ export default function Home() {
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const navLabels = locale === 'pt-BR' 
-    ? { about: 'Sobre', projects: 'Projetos', publications: 'Publicações', experience: 'Experiência', skills: 'Habilidades', books: 'Livros', education: 'Formação', contact: 'Contato' }
-    : { about: 'About', projects: 'Projects', publications: 'Publications', experience: 'Experience', skills: 'Skills', books: 'Books', education: 'Education', contact: 'Contact' };
+  const t = translations[locale];
 
-  const heroText = locale === 'pt-BR'
-    ? { description: '20+ anos de experiência em tecnologia. Especializado em sistemas distribuídos, design de sistemas e liderança de equipes de engenharia.', contact: 'Entre em contato', viewExperience: 'Ver experiência' }
-    : { description: '20+ years of experience in technology. Specialized in distributed systems, software design and engineering team leadership.', contact: 'Contact me', viewExperience: 'View experience' };
-
-  const contactText = locale === 'pt-BR'
-    ? { title: 'Vamos conversar?', subtitle: 'Entre em contato para conversas sobre tecnologia', location: 'São Paulo, SP - Brasil' }
-    : { title: "Let's talk?", subtitle: 'Get in touch for conversations about technology', location: 'São Paulo, SP - Brazil' };
+  const navLabels = t.nav;
+  const heroText = t.hero;
+  const contactText = t.contact;
 
   return (
     <div className="min-h-screen transition-colors">
@@ -243,10 +237,11 @@ export default function Home() {
             <Link href="/#contato" className="hover:text-blue-600 transition-colors">{navLabels.contact}</Link>
             <button
               onClick={toggleLocale}
-              className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
               aria-label="Toggle language"
             >
-              <Globe className="w-5 h-5" />
+              <Globe className="w-4 h-4" />
+              {locale === 'pt-BR' ? 'PT' : 'EN'}
             </button>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}

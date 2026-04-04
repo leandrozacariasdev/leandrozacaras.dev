@@ -36,3 +36,114 @@ export function useLocale() {
   if (!context) throw new Error('useLocale must be used within LocaleProvider');
   return context;
 }
+
+export const translations = {
+  'pt-BR': {
+    nav: {
+      about: 'Sobre',
+      projects: 'Projetos',
+      publications: 'Publicações',
+      experience: 'Experiência',
+      skills: 'Habilidades',
+      books: 'Livros',
+      education: 'Formação',
+      contact: 'Contato',
+    },
+    hero: {
+      role: 'Software Engineer',
+      description: '20+ anos de experiência em tecnologia. Especializado em sistemas distribuídos, design de sistemas e liderança de equipes de engenharia.',
+      contact: 'Entre em contato',
+      viewExperience: 'Ver experiência',
+    },
+    contact: {
+      title: 'Vamos conversar?',
+      subtitle: 'Entre em contato para conversas sobre tecnologia',
+      location: 'São Paulo, SP - Brasil',
+    },
+    experience: {
+      title: 'Experiência Profissional',
+      subtitle: 'Minha trajetória profissional',
+    },
+    projects: {
+      title: 'Projetos',
+      subtitle: 'Projetos que demonstram minha experiência e habilidades técnicas',
+      viewProject: 'Ver projeto',
+    },
+    skills: {
+      title: 'Habilidades Técnicas',
+      subtitle: 'Tecnologias e competências',
+    },
+    books: {
+      title: 'Livros Recomendados',
+      subtitle: 'Livros que marcaram minha trajetória',
+    },
+    education: {
+      title: 'Formação e Premiações',
+      subtitle: 'Educação e reconhecimentos',
+      educationTitle: 'Formação Acadêmica',
+      awardsTitle: 'Premiações',
+    },
+    publications: {
+      title: 'Publicações',
+      subtitle: 'Artigos e conteúdos técnicos que compartilhei',
+      readMore: 'Ler publicação',
+    },
+    common: {
+      back: 'Voltar',
+    },
+  },
+  'en': {
+    nav: {
+      about: 'About',
+      projects: 'Projects',
+      publications: 'Publications',
+      experience: 'Experience',
+      skills: 'Skills',
+      books: 'Books',
+      education: 'Education',
+      contact: 'Contact',
+    },
+    hero: {
+      role: 'Software Engineer',
+      description: '20+ years of experience in technology. Specialized in distributed systems, software design and engineering team leadership.',
+      contact: 'Contact me',
+      viewExperience: 'View experience',
+    },
+    contact: {
+      title: "Let's talk?",
+      subtitle: 'Get in touch for conversations about technology',
+      location: 'São Paulo, SP - Brazil',
+    },
+    experience: {
+      title: 'Professional Experience',
+      subtitle: 'My career journey',
+    },
+    projects: {
+      title: 'Projects',
+      subtitle: 'Projects that demonstrate my experience and technical skills',
+      viewProject: 'View project',
+    },
+    skills: {
+      title: 'Technical Skills',
+      subtitle: 'Technologies and competencies',
+    },
+    books: {
+      title: 'Recommended Books',
+      subtitle: 'Books that shaped my career',
+    },
+    education: {
+      title: 'Education & Awards',
+      subtitle: 'Education and recognitions',
+      educationTitle: 'Education',
+      awardsTitle: 'Awards',
+    },
+    publications: {
+      title: 'Publications',
+      subtitle: 'Technical articles and content I have shared',
+      readMore: 'Read publication',
+    },
+    common: {
+      back: 'Back',
+    },
+  },
+};

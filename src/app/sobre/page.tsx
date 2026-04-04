@@ -5,8 +5,9 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, Sun, Moon, Mail, MapPin, ArrowDown } from 'lucide-react';
+import { ArrowLeft, Sun, Moon, Mail, MapPin, ArrowDown, Globe } from 'lucide-react';
 import { LinkedInIcon } from '@/components/icons';
+import { useLocale, translations } from '@/components/locale-provider';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -29,9 +30,15 @@ function useMounted() {
 
 export default function Sobre() {
   const { theme, setTheme } = useTheme();
+  const { locale, setLocale } = useLocale();
+  const t = translations[locale];
   const mounted = useMounted();
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const toggleLocale = () => {
+    setLocale(locale === 'pt-BR' ? 'en' : 'pt-BR');
+  };
 
   return (
     <div className="min-h-screen transition-colors">
@@ -41,8 +48,16 @@ export default function Sobre() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Back
+              {t.common.back}
             </Link>
+            <button
+              onClick={toggleLocale}
+              className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
+              aria-label="Toggle language"
+            >
+              <Globe className="w-4 h-4" />
+              {locale === 'pt-BR' ? 'PT' : 'EN'}
+            </button>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
@@ -82,24 +97,23 @@ export default function Sobre() {
             </motion.div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Leandro Zacarias</h1>
             <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 font-medium mb-6">
-              Software Engineer
+              {t.hero.role}
             </p>
             <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-8">
-              20+ years of experience in technology. Specialized in distributed systems, 
-              software design and engineering team leadership.
+              {t.hero.description}
             </p>
             <div className="flex justify-center gap-4">
               <a
                 href="mailto:me@leandrozacarias.dev"
                 className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Contact me
+                {t.hero.contact}
               </a>
               <Link
-                href="/experience"
+                href="/experiencia"
                 className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg hover:border-blue-500 transition-colors"
               >
-                View experience
+                {t.hero.viewExperience}
               </Link>
             </div>
             <motion.div
@@ -117,8 +131,8 @@ export default function Sobre() {
       <footer id="contato" className="py-20 px-4 bg-white dark:bg-zinc-900">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-4">Let&apos;s talk?</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-12">Get in touch for conversations about technology</p>
+            <h2 className="text-3xl font-semibold mb-4">{t.contact.title}</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 mb-12">{t.contact.subtitle}</p>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-4">
             <FadeIn delay={0.1}>
@@ -133,7 +147,7 @@ export default function Sobre() {
             <FadeIn delay={0.3}>
               <div className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800">
                 <MapPin className="text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>São Paulo, SP - Brasil</span>
+                <span>{t.contact.location}</span>
               </div>
             </FadeIn>
             <FadeIn delay={0.5}>
