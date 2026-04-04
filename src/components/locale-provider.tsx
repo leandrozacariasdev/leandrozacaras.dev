@@ -1,7 +1,7 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { createContext, useContext, useState, useEffect, ReactNode, Suspense } from 'react';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 type Locale = 'en' | 'pt-BR';
 
@@ -12,17 +12,20 @@ interface LocaleContextType {
 
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
+function LocaleContent({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('pt-BR');
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('locale') === 'en') {
+    const localeParam = searchParams.get('locale');
+    if (localeParam === 'en') {
       setLocaleState('en');
+    } else {
+      setLocaleState('pt-BR');
     }
-  }, []);
+  }, [searchParams]);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
@@ -37,6 +40,14 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     <LocaleContext.Provider value={{ locale, setLocale }}>
       {children}
     </LocaleContext.Provider>
+  );
+}
+
+export function LocaleProvider({ children }: { children: ReactNode }) {
+  return (
+    <Suspense fallback={null}>
+      <LocaleContent>{children}</LocaleContent>
+    </Suspense>
   );
 }
 
