@@ -236,14 +236,14 @@ export default function Home() {
         <nav className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</Link>
           <div className="flex gap-6 items-center text-sm">
-            <a href="#sobre" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Sobre</a>
-            <a href="#projetos" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Projetos</a>
-            <Link href="/publicacoes" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Publicações</Link>
-            <a href="#experiencia" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Experiência</a>
-            <a href="#habilidades" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Habilidades</a>
-            <Link href="/livros" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Livros</Link>
-            <a href="#formacao" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Formação</a>
-            <a href="#contato" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Contato</a>
+            <Link href="/#sobre" className="hover:text-blue-600 transition-colors">Sobre</Link>
+            <Link href="/projetos" className="hover:text-blue-600 transition-colors">Projetos</Link>
+            <Link href="/publicacoes" className="hover:text-blue-600 transition-colors">Publicações</Link>
+            <Link href="/experiencia" className="hover:text-blue-600 transition-colors">Experiência</Link>
+            <Link href="/habilidades" className="hover:text-blue-600 transition-colors">Habilidades</Link>
+            <Link href="/livros" className="hover:text-blue-600 transition-colors">Livros</Link>
+            <Link href="/formacao" className="hover:text-blue-600 transition-colors">Formação</Link>
+            <Link href="/#contato" className="hover:text-blue-600 transition-colors">Contato</Link>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
