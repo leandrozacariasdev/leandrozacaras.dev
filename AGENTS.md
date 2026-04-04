@@ -131,6 +131,13 @@ try {
 - Validate and sanitize all user inputs
 
 ## Git Conventions
+
+### Deployment Rules
+- **NEVER publish to production without user approval**
+- Always test changes locally first with `npm run dev`
+- Wait for user to test and approve before running `vercel --prod`
+- Run `npm run lint` and `npm run build` locally before any deployment
+
 - Use semantic commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`
 - Keep commits atomic and focused
 - Write meaningful PR descriptions
