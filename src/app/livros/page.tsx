@@ -60,7 +60,7 @@ export default function Livros() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Voltar
+              Back
             </Link>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -76,8 +76,8 @@ export default function Livros() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Livros Recomendados</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Livros que marcaram minha trajetória</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Recommended Books</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">Books that shaped my career</p>
           </FadeIn>
         </motion.div>
       </section>

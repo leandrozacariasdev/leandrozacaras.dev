@@ -12,13 +12,13 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Engineering Manager',
-        period: 'nov. 2025 - atual',
-        description: 'Liderança técnica e gestão de equipe de engenharia.',
+        period: 'Nov 2025 - Present',
+        description: 'Technical leadership and team management.',
       },
       {
         title: 'Engineering Lead',
-        period: 'fev. 2022 - nov. 2025',
-        description: 'Liderança técnica em equipe de desenvolvimento.',
+        period: 'Feb 2022 - Nov 2025',
+        description: 'Technical leadership in development team.',
       },
     ],
   },
@@ -27,8 +27,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Tech Lead',
-        period: 'out. 2020 - fev. 2022',
-        description: 'Liderança técnica em projetos de tecnologia financeira.',
+        period: 'Oct 2020 - Feb 2022',
+        description: 'Technical leadership in fintech projects.',
       },
     ],
   },
@@ -36,16 +36,14 @@ const EXPERIENCES = [
     company: 'Grupo Flytour',
     roles: [
       {
-        title: 'Coordenador de desenvolvimento',
-        period: 'abr. 2018 - set. 2020',
-        description:
-          'Identificação de oportunidades e melhorias no ciclo de desenvolvimento; Definição da arquitetura de novos sistemas; Code review, monitoramento e direcionamento do time. Realização de entrevistas técnicas e novas contratações; Feedback periódico; Referência técnica e conhecimento profundo do negócio; Onboarding de clientes internacionais.',
+        title: 'Development Coordinator',
+        period: 'Apr 2018 - Sep 2020',
+        description: 'Architecture definition, code review and team guidance.',
       },
       {
         title: 'Senior Development Analyst',
-        period: 'fev. 2015 - abr. 2018',
-        description:
-          'Migração dos sistemas legados monolíticos para plataforma distribuída em nuvem; Desenvolvimento de plataforma CMS centralizada em Node.js para substituição de todos os sites e portais da companhia.',
+        period: 'Feb 2015 - Apr 2018',
+        description: 'Legacy to cloud migration and Node.js CMS platform.',
       },
     ],
   },
@@ -54,8 +52,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Senior Development Analyst',
-        period: 'jan. 2013 - jan. 2015',
-        description: 'Atuando como Analista de Desenvolvimento de Sistemas em projetos dos clientes: Livraria Saraiva, Vivo, Grupo CRM e Grupo Flytour.',
+        period: 'Jan 2013 - Jan 2015',
+        description: 'Systems development for Livraria Saraiva, Vivo and Grupo Flytour.',
       },
     ],
   },
@@ -64,13 +62,13 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Senior Development Analyst',
-        period: 'jul. 2012 - dez. 2012',
-        description: 'Migração de legado em Power Builder para plataforma .NET do Banco Itaú BBA.',
+        period: 'Jul 2012 - Dec 2012',
+        description: 'Power Builder to .NET migration for Itaú BBA.',
       },
       {
         title: 'System Analyst',
-        period: 'abr. 2010 - ago. 2010',
-        description: 'Migração de dados e sistemas legados do Banco BMC, adquirido pelo Bradesco.',
+        period: 'Apr 2010 - Aug 2010',
+        description: 'Legacy migration from Banco BMC to Bradesco.',
       },
     ],
   },
@@ -79,8 +77,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Development Analyst',
-        period: 'set. 2010 - jun. 2012',
-        description: 'Melhorias nos processos de captação e processamento de propostas de empréstimos consignados junto à Dataprev. Implantação do sistema gerenciador de serviços para operacionalização de solicitações de saque, seguro, cartão adicional e 2ª via de cartão no módulo de cartão consignado.',
+        period: 'Sep 2010 - Jun 2012',
+        description: 'Loan proposal processing and service management system.',
       },
     ],
   },
@@ -89,8 +87,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Full Stack Engineer',
-        period: 'jun. 2008 - mar. 2010',
-        description: 'Sustentação do portal de captação de propostas de crédito consignado do Banco Cruzeiro do Sul e dos sites institucionais da corretora de valores Apregoa e do FIDC BCSul Verax Crédito Consignado. Migração de regras de negócios para arquitetura SOA em .NET WCF.',
+        period: 'Jun 2008 - Mar 2010',
+        description: 'Credit portal maintenance and SOA migration.',
       },
     ],
   },
@@ -99,8 +97,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Full Stack Web Developer',
-        period: 'out. 2007 - mai. 2008',
-        description: 'Desenvolvimento web.',
+        period: 'Oct 2007 - May 2008',
+        description: 'Web development.',
       },
     ],
   },
@@ -109,8 +107,8 @@ const EXPERIENCES = [
     roles: [
       {
         title: 'Information Technology Intern',
-        period: 'out. 2006 - ago. 2007',
-        description: 'Estágio em tecnologia da informação.',
+        period: 'Oct 2006 - Aug 2007',
+        description: 'IT internship.',
       },
     ],
   },
@@ -120,7 +118,8 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
     >
       {children}
@@ -147,12 +146,12 @@ export default function Experiencia() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Voltar
+              Back
             </Link>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-              aria-label="Alternar tema"
+              aria-label="Toggle theme"
             >
               {mounted && (theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />)}
             </button>
@@ -163,8 +162,8 @@ export default function Experiencia() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Experiência Profissional</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Minha trajetória profissional</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Professional Experience</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">My career journey</p>
           </FadeIn>
         </motion.div>
       </section>

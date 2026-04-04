@@ -50,7 +50,7 @@ export default function Publicacoes() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Voltar
+              Back
             </Link>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -66,8 +66,8 @@ export default function Publicacoes() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Publicações</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Artigos e conteúdos técnicos que compartilhei</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Publications</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">Technical articles and content I have shared</p>
           </FadeIn>
         </motion.div>
       </section>

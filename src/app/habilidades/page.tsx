@@ -48,7 +48,7 @@ export default function Habilidades() {
           <div className="flex gap-6 items-center text-sm">
             <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Voltar
+              Back
             </Link>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -64,8 +64,8 @@ export default function Habilidades() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Habilidades Técnicas</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Technologias e competências</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Technical Skills</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">Technologies and competencies</p>
           </FadeIn>
         </motion.div>
       </section>

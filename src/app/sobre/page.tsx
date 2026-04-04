@@ -1,44 +1,19 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, Sun, Moon, ExternalLink, Mail, MapPin } from 'lucide-react';
+import { ArrowLeft, Sun, Moon, Mail, MapPin, ArrowDown } from 'lucide-react';
 import { LinkedInIcon } from '@/components/icons';
-
-const PROJECTS = [
-  {
-    title: 'Portal de Crédito Consignado',
-    description: 'Plataforma completa para captação de propostas de crédito consignado com integração SOA.',
-    tech: ['.NET', 'WCF', 'SQL Server'],
-    link: '#',
-  },
-  {
-    title: 'CMS Corporate',
-    description: 'Plataforma CMS centralizada em Node.js para substituição de todos os sites e portais da companhia.',
-    tech: ['Node.js', 'Angular', 'MongoDB'],
-    link: '#',
-  },
-  {
-    title: 'Plataforma de Viagens',
-    description: 'Sistema de reservas e gestão de viagens com microsserviços e arquitetura distribuída.',
-    tech: ['Kubernetes', 'Azure', 'React'],
-    link: '#',
-  },
-  {
-    title: 'Sistema de Crédito Bom Pra Crédito',
-    description: 'Plataforma fintech para análise e concessão de crédito com Scoring Sphinx.',
-    tech: ['.NET Core', 'Kafka', 'PostgreSQL'],
-    link: '#',
-  },
-];
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
     >
       {children}
@@ -47,11 +22,12 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 function useMounted() {
-  const [mounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useState(() => setMounted(true));
   return mounted;
 }
 
-export default function Projetos() {
+export default function Sobre() {
   const { theme, setTheme } = useTheme();
   const mounted = useMounted();
   const { scrollYProgress } = useScroll();
@@ -78,54 +54,71 @@ export default function Projetos() {
         </nav>
       </header>
 
-      <section className="pt-32 pb-20 px-4">
-        <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-blue-50 dark:from-blue-900 dark:via-zinc-900 dark:to-zinc-950">
+          <div className="absolute inset-0 opacity-30 dark:opacity-30">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-300/30 dark:bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/30 dark:bg-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          </div>
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        </div>
+
+        <motion.div style={{ opacity: heroOpacity }} className="relative z-10 text-center px-4">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Projects</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">Projects that demonstrate my experience and technical skills</p>
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, type: 'spring', delay: 0.1 }}
+              className="w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden ring-4 ring-blue-500/30"
+            >
+              <Image
+                src="/profile.jpeg"
+                alt="Leandro Zacarias"
+                width={160}
+                height={160}
+                className="w-full h-full object-cover"
+                priority
+              />
+            </motion.div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Leandro Zacarias</h1>
+            <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 font-medium mb-6">
+              Software Engineer
+            </p>
+            <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-8">
+              20+ years of experience in technology. Specialized in distributed systems, 
+              software design and engineering team leadership.
+            </p>
+            <div className="flex justify-center gap-4">
+              <a
+                href="mailto:me@leandrozacarias.dev"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Contact me
+              </a>
+              <Link
+                href="/experience"
+                className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg hover:border-blue-500 transition-colors"
+              >
+                View experience
+              </Link>
+            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="absolute bottom-10 left-1/2 -translate-x-1/2"
+            >
+              <ArrowDown className="w-6 h-6 text-zinc-400 animate-bounce" />
+            </motion.div>
           </FadeIn>
         </motion.div>
-      </section>
-
-      <section className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-6">
-            {PROJECTS.map((project, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="group p-6 bg-white dark:bg-zinc-900 rounded-xl border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all"
-                >
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-600 dark:text-blue-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech, i) => (
-                      <span key={i} className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <a
-                    href={project.link}
-                    className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    Ver projeto
-                  </a>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
       </section>
 
       <footer id="contato" className="py-20 px-4 bg-white dark:bg-zinc-900">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
             <h2 className="text-3xl font-semibold mb-4">Let&apos;s talk?</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-12">Entre em contato para conversas sobre tecnologia</p>
+            <p className="text-zinc-600 dark:text-zinc-400 mb-12">Get in touch for conversations about technology</p>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-4">
             <FadeIn delay={0.1}>

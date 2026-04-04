@@ -1,10 +1,10 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, MapPin, ExternalLink, ArrowDown, Sun, Moon } from 'lucide-react';
 import { LinkedInIcon, GithubIcon } from '@/components/icons';
 
@@ -176,14 +176,11 @@ const AWARDS = [
 ];
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
     >
       {children}
@@ -208,24 +205,6 @@ export default function Home() {
     offset: ['start start', 'end start'],
   });
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springConfig = { damping: 25, stiffness: 150 };
-  const springX = useSpring(mouseX, springConfig);
-  const springY = useSpring(mouseY, springConfig);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 2;
-      const y = (e.clientY / innerHeight - 0.5) * 2;
-      mouseX.set(x);
-      mouseY.set(y);
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
-
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
@@ -236,7 +215,7 @@ export default function Home() {
         <nav className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</Link>
           <div className="flex gap-6 items-center text-sm">
-            <Link href="/#sobre" className="hover:text-blue-600 transition-colors">Sobre</Link>
+            <Link href="/sobre" className="hover:text-blue-600 transition-colors">Sobre</Link>
             <Link href="/projetos" className="hover:text-blue-600 transition-colors">Projetos</Link>
             <Link href="/publicacoes" className="hover:text-blue-600 transition-colors">Publicações</Link>
             <Link href="/experiencia" className="hover:text-blue-600 transition-colors">Experiência</Link>
@@ -260,29 +239,17 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      {/* Hero Section with Parallax and Mouse Follow */}
+      {/* Hero Section with Parallax */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Animated Background */}
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-blue-50 dark:from-blue-900 dark:via-zinc-900 dark:to-zinc-950"
-          style={{
-            x: springX,
-            y: springY,
-          }}
-        >
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-blue-50 dark:from-blue-900 dark:via-zinc-900 dark:to-zinc-950">
           <div className="absolute inset-0 opacity-30 dark:opacity-30">
-            <motion.div 
-              className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-300/30 dark:bg-blue-500/20 rounded-full blur-3xl"
-              style={{ x: springX, y: springY }}
-            />
-            <motion.div 
-              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/30 dark:bg-blue-600/20 rounded-full blur-3xl"
-              style={{ x: springX, y: springY }}
-            />
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-300/30 dark:bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/30 dark:bg-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
           </div>
           {/* Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
-        </motion.div>
+        </div>
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 text-center px-4">
           <motion.div
@@ -523,7 +490,7 @@ export default function Home() {
       <section id="contato" className="py-20 px-4 scroll-mt-24">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h2 className="text-3xl font-semibold mb-4">Vamos conversar?</h2>
+            <h2 className="text-3xl font-semibold mb-4">Let&apos;s talk?</h2>
             <p className="text-zinc-600 dark:text-zinc-400 mb-12">Entre em contato para conversas sobre tecnologia</p>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-4">
