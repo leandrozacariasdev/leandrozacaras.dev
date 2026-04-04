@@ -8,33 +8,6 @@ import { ArrowLeft, Sun, Moon, ExternalLink, Mail, MapPin, Globe } from 'lucide-
 import { LinkedInIcon } from '@/components/icons';
 import { useLocale, translations } from '@/components/locale-provider';
 
-const PROJECTS = [
-  {
-    title: 'Portal de Crédito Consignado',
-    description: 'Plataforma completa para captação de propostas de crédito consignado com integração SOA.',
-    tech: ['.NET', 'WCF', 'SQL Server'],
-    link: '#',
-  },
-  {
-    title: 'CMS Corporate',
-    description: 'Plataforma CMS centralizada em Node.js para substituição de todos os sites e portais da companhia.',
-    tech: ['Node.js', 'Angular', 'MongoDB'],
-    link: '#',
-  },
-  {
-    title: 'Plataforma de Viagens',
-    description: 'Sistema de reservas e gestão de viagens com microsserviços e arquitetura distribuída.',
-    tech: ['Kubernetes', 'Azure', 'React'],
-    link: '#',
-  },
-  {
-    title: 'Sistema de Crédito Bom Pra Crédito',
-    description: 'Plataforma fintech para análise e concessão de crédito com Scoring Sphinx.',
-    tech: ['.NET Core', 'Kafka', 'PostgreSQL'],
-    link: '#',
-  },
-];
-
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
     <motion.div
@@ -96,8 +69,8 @@ export default function Projetos() {
       <section className="pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.projects.title}</h1>
-            <p className="text-xl text-zinc-600 dark:text-zinc-400">{t.projects.subtitle}</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.projectsPage.title}</h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">{t.projectsPage.subtitle}</p>
           </FadeIn>
         </motion.div>
       </section>
@@ -105,7 +78,7 @@ export default function Projetos() {
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-6">
-            {PROJECTS.map((project, index) => (
+            {t.projects.map((project, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <motion.div
                   whileHover={{ scale: 1.02 }}

@@ -7,114 +7,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, Sun, Moon, Globe } from 'lucide-react';
 import { useLocale, translations } from '@/components/locale-provider';
 
-const EXPERIENCES = [
-  {
-    company: 'Creditas',
-    roles: [
-      {
-        title: 'Engineering Manager',
-        period: 'Nov 2025 - Present',
-        description: 'Technical leadership and team management.',
-      },
-      {
-        title: 'Engineering Lead',
-        period: 'Feb 2022 - Nov 2025',
-        description: 'Technical leadership in development team.',
-      },
-    ],
-  },
-  {
-    company: 'Bom Pra Crédito',
-    roles: [
-      {
-        title: 'Tech Lead',
-        period: 'Oct 2020 - Feb 2022',
-        description: 'Technical leadership in fintech projects.',
-      },
-    ],
-  },
-  {
-    company: 'Grupo Flytour',
-    roles: [
-      {
-        title: 'Development Coordinator',
-        period: 'Apr 2018 - Sep 2020',
-        description: 'Architecture definition, code review and team guidance.',
-      },
-      {
-        title: 'Senior Development Analyst',
-        period: 'Feb 2015 - Apr 2018',
-        description: 'Legacy to cloud migration and Node.js CMS platform.',
-      },
-    ],
-  },
-  {
-    company: 'Ventron',
-    roles: [
-      {
-        title: 'Senior Development Analyst',
-        period: 'Jan 2013 - Jan 2015',
-        description: 'Systems development for Livraria Saraiva, Vivo and Grupo Flytour.',
-      },
-    ],
-  },
-  {
-    company: 'Deal',
-    roles: [
-      {
-        title: 'Senior Development Analyst',
-        period: 'Jul 2012 - Dec 2012',
-        description: 'Power Builder to .NET migration for Itaú BBA.',
-      },
-      {
-        title: 'System Analyst',
-        period: 'Apr 2010 - Aug 2010',
-        description: 'Legacy migration from Banco BMC to Bradesco.',
-      },
-    ],
-  },
-  {
-    company: 'Banco Cruzeiro do Sul',
-    roles: [
-      {
-        title: 'Development Analyst',
-        period: 'Sep 2010 - Jun 2012',
-        description: 'Loan proposal processing and service management system.',
-      },
-    ],
-  },
-  {
-    company: 'BSA Brasil',
-    roles: [
-      {
-        title: 'Full Stack Engineer',
-        period: 'Jun 2008 - Mar 2010',
-        description: 'Credit portal maintenance and SOA migration.',
-      },
-    ],
-  },
-  {
-    company: 'Teia Advertising and Marketing',
-    roles: [
-      {
-        title: 'Full Stack Web Developer',
-        period: 'Oct 2007 - May 2008',
-        description: 'Web development.',
-      },
-    ],
-  },
-  {
-    company: 'Sweda Automação',
-    roles: [
-      {
-        title: 'Information Technology Intern',
-        period: 'Oct 2006 - Aug 2007',
-        description: 'IT internship.',
-      },
-    ],
-  },
-];
-
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
     <motion.div
@@ -185,7 +77,7 @@ export default function Experiencia() {
 
       <section className="py-20 px-4">
         <div className="max-w-3xl mx-auto space-y-6">
-          {EXPERIENCES.map((exp, index) => (
+          {t.experiences.map((exp, index) => (
             <FadeIn key={index} delay={index * 0.1}>
               <div className="p-5 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/30 transition-all">
                 <h3 className="text-lg font-semibold mb-1">{exp.company}</h3>
