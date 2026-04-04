@@ -1,9 +1,3 @@
 {
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://www.leandrozacarias.dev",
-      "permanent": true
-    }
-  ]
+  "framework": "nextjs"
 }
