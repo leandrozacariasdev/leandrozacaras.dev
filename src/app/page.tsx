@@ -140,6 +140,42 @@ const AWARDS = [
   '1º Lugar - Hackathon Flytour em parceria com a Microsoft',
 ];
 
+const PUBLICATIONS = [
+  {
+    title: 'Arquitetura de Microserviços na Prática',
+    description: 'Guia completo sobre design e implementação de sistemas distribuídos.',
+    link: '#',
+  },
+  {
+    title: 'Kubernetes: Do Básico ao Produção',
+    description: 'Como escalar aplicações com containers em ambientes enterprise.',
+    link: '#',
+  },
+];
+
+const BOOKS = [
+  {
+    title: 'Designing Data-Intensive Applications',
+    author: 'Martin Kleppmann',
+    category: 'Engenharia de Software',
+  },
+  {
+    title: 'The Pragmatic Programmer',
+    author: 'David Thomas & Andrew Hunt',
+    category: 'Carreira',
+  },
+  {
+    title: 'Clean Code',
+    author: 'Robert C. Martin',
+    category: 'Boas Práticas',
+  },
+  {
+    title: 'System Design Interview',
+    author: 'Alex Xu',
+    category: 'Arquitetura',
+  },
+];
+
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -185,8 +221,10 @@ export default function Home() {
           <div className="flex gap-6 items-center text-sm">
             <a href="#sobre" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Sobre</a>
             <a href="#projetos" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Projetos</a>
+            <a href="#publicacoes" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Publicações</a>
             <a href="#experiencia" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Experiência</a>
             <a href="#habilidades" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Habilidades</a>
+            <a href="#livros" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Livros</a>
             <a href="#formacao" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Formação</a>
             <a href="#contato" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Contato</a>
             <button
@@ -364,6 +402,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Publications Section */}
+      <section id="publicacoes" className="py-20 px-4 scroll-mt-24">
+        <div className="max-w-4xl mx-auto">
+          <FadeIn>
+            <h2 className="text-3xl font-semibold mb-4 text-center">Publicações</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-12">Artigos e conteúdos técnicos que compartilhei</p>
+          </FadeIn>
+          <div className="grid md:grid-cols-2 gap-6">
+            {PUBLICATIONS.map((pub, index) => (
+              <FadeIn key={index} delay={index * 0.1}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="p-6 bg-white dark:bg-zinc-900 rounded-xl border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all"
+                >
+                  <h3 className="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">
+                    {pub.title}
+                  </h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 mb-4">{pub.description}</p>
+                  <a
+                    href={pub.link}
+                    className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                    Ler publicação
+                  </a>
+                </motion.div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Experience Section */}
       <section id="experiencia" className="py-20 px-4 bg-white dark:bg-zinc-100 dark:bg-zinc-900/30 scroll-mt-24">
         <div className="max-w-4xl mx-auto">
@@ -423,6 +493,32 @@ export default function Home() {
                     ))}
                   </div>
                 </motion.div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Books Section */}
+      <section id="livros" className="py-20 px-4 bg-white dark:bg-zinc-100 dark:bg-zinc-900/30 scroll-mt-24">
+        <div className="max-w-4xl mx-auto">
+          <FadeIn>
+            <h2 className="text-3xl font-semibold mb-4 text-center">Livros Recomendados</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-12">Livros que marcaram minha trajetória</p>
+          </FadeIn>
+          <div className="grid md:grid-cols-2 gap-4">
+            {BOOKS.map((book, index) => (
+              <FadeIn key={index} delay={index * 0.1}>
+                <div className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/30 transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                    <span className="text-blue-600 dark:text-blue-400 text-xl">📚</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">{book.title}</h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">{book.author}</p>
+                    <span className="text-xs text-blue-600 dark:text-blue-400">{book.category}</span>
+                  </div>
+                </div>
               </FadeIn>
             ))}
           </div>
