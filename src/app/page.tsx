@@ -180,7 +180,7 @@ export default function Home() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800">
         <nav className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-          <a href="/" className="font-semibold text-lg">LZ<span className="text-blue-600">.</span>dev</a>
+          <a href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</a>
           <div className="flex gap-6 items-center text-sm">
             <a href="#sobre" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Sobre</a>
             <a href="#projetos" className="hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded transition-colors">Projetos</a>
