@@ -213,8 +213,8 @@ export default function Recomendacoes() {
                       className="group p-6 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all flex flex-col h-full"
                     >
                       <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/40 dark:to-emerald-800/20 flex items-center justify-center flex-shrink-0 group-hover:from-emerald-200 group-hover:to-emerald-100 dark:group-hover:from-emerald-800/60 dark:group-hover:to-emerald-700/40 transition-colors">
-                          <Globe className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/40 dark:to-amber-800/20 flex items-center justify-center flex-shrink-0 group-hover:from-amber-200 group-hover:to-amber-100 dark:group-hover:from-amber-800/60 dark:group-hover:to-amber-700/40 transition-colors">
+                          <Globe className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                         </div>
                         <Star className="w-5 h-5 text-yellow-400 fill-yellow-400 flex-shrink-0" />
                       </div>
@@ -223,7 +223,7 @@ export default function Recomendacoes() {
                       <div className="flex items-center justify-between">
                         <div className="flex flex-wrap gap-1">
                           {resource.categories.slice(0, 2).map((cat, idx) => (
-                            <span key={idx} className="text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-1 rounded">
+                            <span key={idx} className="text-xs font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2 py-1 rounded">
                               {othersCategories[cat as keyof typeof othersCategories]}
                             </span>
                           ))}
