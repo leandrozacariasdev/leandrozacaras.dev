@@ -248,6 +248,18 @@ export const translations: Record<Locale, Translations> = {
            url: 'https://chrisrichardson.net/',
            categories: ['architecture', 'ddd', 'bestPractices'],
          },
+         {
+           name: 'Alberto Brandolini',
+           description: 'Criador do Event Storming. Pensamentos sobre Domain-Driven Design, modelagem de domínio e como comunicar melhor entre times.',
+           url: 'https://medium.com/@ziobrando',
+           categories: ['ddd', 'bestPractices', 'leadership'],
+         },
+         {
+           name: 'Mathias Verraes',
+           description: 'Expertise em Domain-Driven Design, Event Sourcing e arquitetura orientada a eventos. Contribuições valiosas para comunidade DDD.',
+           url: 'https://verraes.net/',
+           categories: ['architecture', 'ddd', 'bestPractices'],
+         },
       ],
     },
     authors: {
@@ -476,6 +488,18 @@ export const translations: Record<Locale, Translations> = {
            name: 'Chris Richardson',
            description: 'Authority on microservices architecture, distributed patterns, and scalable development. Essential reference for complex systems.',
            url: 'https://chrisrichardson.net/',
+           categories: ['architecture', 'ddd', 'bestPractices'],
+         },
+         {
+           name: 'Alberto Brandolini',
+           description: 'Creator of Event Storming. Thoughts on Domain-Driven Design, domain modeling, and how to better communicate between teams.',
+           url: 'https://medium.com/@ziobrando',
+           categories: ['ddd', 'bestPractices', 'leadership'],
+         },
+         {
+           name: 'Mathias Verraes',
+           description: 'Expertise in Domain-Driven Design, Event Sourcing, and event-driven architecture. Valuable contributions to the DDD community.',
+           url: 'https://verraes.net/',
            categories: ['architecture', 'ddd', 'bestPractices'],
          },
       ],
