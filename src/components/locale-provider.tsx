@@ -103,6 +103,18 @@ interface Translations {
     categories: Record<string, string>;
     booksList: Record<string, { title: string; author: string; link?: string }>;
   };
+  blogs: {
+    title: string;
+    subtitle: string;
+    categories: Record<string, string>;
+    blogsList: { name: string; description: string; url: string; categories: string[] }[];
+  };
+  authors: {
+    title: string;
+    subtitle: string;
+    categories: Record<string, string>;
+    authorsList: { name: string; description: string; url: string; categories: string[] }[];
+  };
   education: {
     title: string;
     subtitle: string;
@@ -176,26 +188,63 @@ export const translations: Record<Locale, Translations> = {
         methodologies: 'Metodologias',
         security: 'Segurança',
         others: 'Outros',
+        },
+     },
+    books: {
+      title: 'Recomendações de Livros',
+      subtitle: 'Livros que marcaram minha trajetória',
+      categories: {
+        software: 'Engenharia de Software',
+        career: 'Carreira',
+        bestPractices: 'Boas Práticas',
+        architecture: 'Arquitetura',
+        usability: 'Usabilidade',
+      },
+      booksList: {
+        dontMakeMeThink: { title: 'Não me faça pensar: atualizado', author: 'Steve Krug', link: 'https://amzn.to/4dvMIb2' },
+        headFirstPatterns: { title: 'Use a Cabeça! Padrões de Projetos', author: 'Freeman & Robson', link: 'https://amzn.to/4dvMLne' },
+        domainDrivenDesign: { title: 'Domain-Driven Design', author: 'Eric Evans', link: 'https://amzn.to/48gS0nb' },
+        cleanCode: { title: 'Clean Code', author: 'Robert C. Martin', link: 'https://amzn.to/3PRFODd' },
       },
     },
-     books: {
-       title: 'Livros Recomendados',
-       subtitle: 'Livros que marcaram minha trajetória',
-       categories: {
-         software: 'Engenharia de Software',
-         career: 'Carreira',
-         bestPractices: 'Boas Práticas',
-         architecture: 'Arquitetura',
-         usability: 'Usabilidade',
-       },
-       booksList: {
-         dontMakeMeThink: { title: 'Não me faça pensar: atualizado', author: 'Steve Krug', link: 'https://amzn.to/4dvMIb2' },
-         headFirstPatterns: { title: 'Use a Cabeça! Padrões de Projetos', author: 'Freeman & Robson', link: 'https://amzn.to/4dvMLne' },
-         domainDrivenDesign: { title: 'Domain-Driven Design', author: 'Eric Evans', link: 'https://amzn.to/48gS0nb' },
-         cleanCode: { title: 'Clean Code', author: 'Robert C. Martin', link: 'https://amzn.to/3PRFODd' },
-       },
+     blogs: {
+      title: 'Blogs Recomendados',
+      subtitle: 'Blogs que acompanho e recomendo',
+      categories: {
+        architecture: 'Arquitetura',
+        ddd: 'Domain-Driven Design',
+        bestPractices: 'Boas Práticas',
+        leadership: 'Liderança Técnica',
+        cleanCode: 'Clean Code',
+      },
+      blogsList: [
+        {
+          name: 'Martin Fowler',
+          description: 'Insights sobre arquitetura de software, padrões de design e boas práticas. Uma das maiores referências em engenharia de software.',
+          url: 'https://martinfowler.com/',
+          categories: ['architecture', 'bestPractices', 'ddd'],
+        },
+        {
+          name: 'Kamil Grzybek',
+          description: 'Exploração profunda em Domain-Driven Design, arquitetura clean e padrões avançados de desenvolvimento.',
+          url: 'https://www.kamilgrzybek.com/',
+          categories: ['architecture', 'ddd', 'cleanCode'],
+        },
+      ],
     },
-    education: {
+    authors: {
+      title: 'Autores Recomendados',
+      subtitle: 'Autores que influenciam meu pensamento técnico',
+      categories: {
+        architecture: 'Arquitetura',
+        ddd: 'Domain-Driven Design',
+        bestPractices: 'Boas Práticas',
+        leadership: 'Liderança Técnica',
+        cleanCode: 'Clean Code',
+      },
+      authorsList: [],
+    },
+     education: {
       title: 'Formação e Premiações',
       subtitle: 'Educação e reconhecimentos',
       educationTitle: 'Formação Acadêmica',
@@ -368,9 +417,46 @@ export const translations: Record<Locale, Translations> = {
          headFirstPatterns: { title: 'Head First Design Patterns', author: 'Freeman & Robson', link: 'https://amzn.to/4dvMLne' },
          domainDrivenDesign: { title: 'Domain-Driven Design', author: 'Eric Evans', link: 'https://amzn.to/48gS0nb' },
          cleanCode: { title: 'Clean Code', author: 'Robert C. Martin', link: 'https://amzn.to/3PRFODd' },
-       },
+        },
+     },
+    blogs: {
+      title: 'Recommended Blogs',
+      subtitle: 'Blogs I follow and recommend',
+      categories: {
+        architecture: 'Architecture',
+        ddd: 'Domain-Driven Design',
+        bestPractices: 'Best Practices',
+        leadership: 'Technical Leadership',
+        cleanCode: 'Clean Code',
+      },
+      blogsList: [
+        {
+          name: 'Martin Fowler',
+          description: 'Insights on software architecture, design patterns, and best practices. One of the biggest references in software engineering.',
+          url: 'https://martinfowler.com/',
+          categories: ['architecture', 'bestPractices', 'ddd'],
+        },
+        {
+          name: 'Kamil Grzybek',
+          description: 'Deep exploration into Domain-Driven Design, clean architecture, and advanced development patterns.',
+          url: 'https://www.kamilgrzybek.com/',
+          categories: ['architecture', 'ddd', 'cleanCode'],
+        },
+      ],
     },
-    education: {
+    authors: {
+      title: 'Recommended Authors',
+      subtitle: 'Authors that influence my technical thinking',
+      categories: {
+        architecture: 'Architecture',
+        ddd: 'Domain-Driven Design',
+        bestPractices: 'Best Practices',
+        leadership: 'Technical Leadership',
+        cleanCode: 'Clean Code',
+      },
+      authorsList: [],
+    },
+     education: {
       title: 'Education & Awards',
       subtitle: 'Education and recognitions',
       educationTitle: 'Education',
