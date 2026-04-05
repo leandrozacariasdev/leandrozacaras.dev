@@ -54,6 +54,7 @@ export default function Home() {
   return (
     <div className="min-h-screen transition-colors">
       <Navbar />
+      <main id="main-content">
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-14 md:pt-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-blue-50 dark:from-blue-900 dark:via-zinc-900 dark:to-zinc-950">
           <div className="absolute inset-0 opacity-30 dark:opacity-30">
@@ -321,6 +322,7 @@ export default function Home() {
       <footer className="py-8 text-center text-sm text-zinc-500 border-t border-zinc-800">
         <p>© {new Date().getFullYear()} Leandro Zacarias. {locale === 'pt-BR' ? 'Todos os direitos reservados.' : 'All rights reserved.'}</p>
       </footer>
+      </main>
     </div>
   );
 }

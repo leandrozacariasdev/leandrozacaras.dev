@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LocaleProvider } from "@/components/locale-provider";
-import Cursor from "@/components/cursor";
+import { PersonSchema } from "@/components/schema-markup";
+import ScrollToTop from "@/components/scroll-to-top";
+import ScrollProgress from "@/components/scroll-progress";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -48,13 +50,22 @@ export const metadata: Metadata = {
       "Software Engineer com 20+ anos de experiência. Especializado em sistemas distribuídos, design de sistemas e liderança de equipes de engenharia.",
     firstName: "Leandro",
     lastName: "Zacarias",
+    images: [
+      {
+        url: "https://leandrozacarias.dev/profile.jpeg",
+        width: 400,
+        height: 400,
+        alt: "Leandro Zacarias - Software Engineer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Leandro Zacarias | Software Engineer & Tech Lead",
     description:
       "Software Engineer com 20+ anos de experiência. Especializado em sistemas distribuídos, design de sistemas e liderança de equipes de engenharia.",
-    creator: "@leandrozacarias",
+    creator: "@leandrozacaria_",
+    images: ["https://leandrozacarias.dev/profile.jpeg"],
   },
 };
 
@@ -65,10 +76,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <PersonSchema />
+      </head>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <LocaleProvider>
-            <Cursor />
+            <a 
+              href="#main-content" 
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:p-2 focus:bg-blue-600 focus:text-white focus:rounded focus:outline-none"
+            >
+              Skip to main content
+            </a>
+            <ScrollProgress />
+            <ScrollToTop />
             {children}
           </LocaleProvider>
         </ThemeProvider>

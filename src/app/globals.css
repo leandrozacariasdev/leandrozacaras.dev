@@ -19,6 +19,27 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+/* Global focus-visible styles for accessibility */
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-offset-2 ring-blue-500;
+  }
+
+  .dark a:focus-visible,
+  .dark button:focus-visible,
+  .dark [role="button"]:focus-visible,
+  .dark input:focus-visible,
+  .dark textarea:focus-visible,
+  .dark select:focus-visible {
+    @apply ring-offset-zinc-950;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
