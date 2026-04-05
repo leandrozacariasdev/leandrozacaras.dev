@@ -454,7 +454,6 @@ export const translations: Record<Locale, Translations> = {
       },
     ],
     awards: [
-      'Prêmio de profissional de destaque da área de tecnologia',
       '3º Lugar - 1º Hackathon Viagens (44ª ABAV Expo Internacional)',
       '1º Lugar - Hackathon Flytour em parceria com a Microsoft',
     ],
@@ -756,7 +755,6 @@ export const translations: Record<Locale, Translations> = {
       },
     ],
     awards: [
-      'Outstanding technology professional award',
       '3rd Place - 1st Travel Hackathon (44th ABAV International Expo)',
       '1st Place - Flytour Hackathon in partnership with Microsoft',
     ],
