@@ -109,13 +109,19 @@ interface Translations {
     categories: Record<string, string>;
     blogsList: { name: string; description: string; url: string; categories: string[] }[];
   };
-  authors: {
-    title: string;
-    subtitle: string;
-    categories: Record<string, string>;
-    authorsList: { name: string; description: string; url: string; categories: string[] }[];
-  };
-  education: {
+   authors: {
+     title: string;
+     subtitle: string;
+     categories: Record<string, string>;
+     authorsList: { name: string; description: string; url: string; categories: string[] }[];
+   };
+   others: {
+     title: string;
+     subtitle: string;
+     categories: Record<string, string>;
+     othersList: { name: string; description: string; url: string; categories: string[] }[];
+   };
+   education: {
     title: string;
     subtitle: string;
     educationTitle: string;
@@ -268,18 +274,54 @@ export const translations: Record<Locale, Translations> = {
          },
       ],
     },
-    authors: {
-      title: 'Autores Recomendados',
-      subtitle: 'Autores que influenciam meu pensamento técnico',
-      categories: {
-        architecture: 'Arquitetura',
-        ddd: 'Domain-Driven Design',
-        bestPractices: 'Boas Práticas',
-        leadership: 'Liderança Técnica',
-        cleanCode: 'Clean Code',
-      },
-      authorsList: [],
-    },
+   authors: {
+     title: 'Autores Recomendados',
+     subtitle: 'Autores que influenciam meu pensamento técnico',
+     categories: {
+       architecture: 'Arquitetura',
+       ddd: 'Domain-Driven Design',
+       bestPractices: 'Boas Práticas',
+       leadership: 'Liderança Técnica',
+       cleanCode: 'Clean Code',
+     },
+     authorsList: [],
+   },
+   others: {
+     title: 'Outros Recursos',
+     subtitle: 'Recursos essenciais de referência',
+     categories: {
+       architecture: 'Arquitetura',
+       bestPractices: 'Boas Práticas',
+       patterns: 'Padrões',
+       integration: 'Integração',
+     },
+     othersList: [
+       {
+         name: 'IT Revolution',
+         description: 'Editora de referência em DevOps, liderança tecnológica e transformação digital. Publicações essenciais sobre engenharia de software moderna e estratégia empresarial.',
+         url: 'https://itrevolution.com/',
+         categories: ['bestPractices', 'architecture'],
+       },
+       {
+         name: 'Refactoring.Guru',
+         description: 'Recurso abrangente e visual sobre técnicas de refatoração, padrões de design e princípios SOLID. Explicações claras com exemplos em múltiplas linguagens de programação.',
+         url: 'https://refactoring.guru/',
+         categories: ['bestPractices', 'patterns'],
+       },
+       {
+         name: 'Refactoring',
+         description: 'Catálogo definitivo de técnicas de refatoração por Martin Fowler. Guia prático e completo para melhorar código mantendo seu comportamento externo.',
+         url: 'https://refactoring.com/',
+         categories: ['bestPractices', 'patterns'],
+       },
+       {
+         name: 'Enterprise Integration Patterns',
+         description: 'Recurso fundamental de Gregor Hohpe sobre padrões de integração e mensageria. Essencial para design de sistemas distribuídos, microsserviços e arquiteturas baseadas em eventos.',
+         url: 'https://www.enterpriseintegrationpatterns.com/',
+         categories: ['architecture', 'integration', 'patterns'],
+       },
+     ],
+   },
      education: {
       title: 'Formação e Premiações',
       subtitle: 'Educação e reconhecimentos',
@@ -516,18 +558,54 @@ export const translations: Record<Locale, Translations> = {
          },
       ],
     },
-    authors: {
-      title: 'Recommended Authors',
-      subtitle: 'Authors that influence my technical thinking',
-      categories: {
-        architecture: 'Architecture',
-        ddd: 'Domain-Driven Design',
-        bestPractices: 'Best Practices',
-        leadership: 'Technical Leadership',
-        cleanCode: 'Clean Code',
-      },
-      authorsList: [],
-    },
+     authors: {
+       title: 'Recommended Authors',
+       subtitle: 'Authors that influence my technical thinking',
+       categories: {
+         architecture: 'Architecture',
+         ddd: 'Domain-Driven Design',
+         bestPractices: 'Best Practices',
+         leadership: 'Technical Leadership',
+         cleanCode: 'Clean Code',
+       },
+       authorsList: [],
+     },
+     others: {
+       title: 'Other Resources',
+       subtitle: 'Essential reference resources',
+       categories: {
+         architecture: 'Architecture',
+         bestPractices: 'Best Practices',
+         patterns: 'Patterns',
+         integration: 'Integration',
+       },
+       othersList: [
+         {
+           name: 'IT Revolution',
+           description: 'Reference publisher for DevOps, technical leadership, and digital transformation. Essential publications on modern software engineering and enterprise strategy.',
+           url: 'https://itrevolution.com/',
+           categories: ['bestPractices', 'architecture'],
+         },
+         {
+           name: 'Refactoring.Guru',
+           description: 'Comprehensive visual resource on refactoring techniques, design patterns, and SOLID principles. Clear explanations with examples in multiple programming languages.',
+           url: 'https://refactoring.guru/',
+           categories: ['bestPractices', 'patterns'],
+         },
+         {
+           name: 'Refactoring',
+           description: 'Definitive catalog of refactoring techniques by Martin Fowler. Practical and complete guide to improve code while maintaining its external behavior.',
+           url: 'https://refactoring.com/',
+           categories: ['bestPractices', 'patterns'],
+         },
+         {
+           name: 'Enterprise Integration Patterns',
+           description: 'Fundamental resource by Gregor Hohpe on integration patterns and messaging. Essential for distributed systems design, microservices, and event-driven architectures.',
+           url: 'https://www.enterpriseintegrationpatterns.com/',
+           categories: ['architecture', 'integration', 'patterns'],
+         },
+       ],
+     },
      education: {
       title: 'Education & Awards',
       subtitle: 'Education and recognitions',
