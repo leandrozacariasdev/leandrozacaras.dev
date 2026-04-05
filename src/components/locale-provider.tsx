@@ -260,6 +260,12 @@ export const translations: Record<Locale, Translations> = {
            url: 'https://verraes.net/',
            categories: ['architecture', 'ddd', 'bestPractices'],
          },
+         {
+           name: 'Gregor Hohpe',
+           description: 'Autoridade em arquitetura empresarial, padrões de integração e transformação digital. Insights profundos sobre escalabilidade e design de sistemas complexos.',
+           url: 'https://architectelevator.com/',
+           categories: ['architecture', 'bestPractices', 'leadership'],
+         },
       ],
     },
     authors: {
@@ -501,6 +507,12 @@ export const translations: Record<Locale, Translations> = {
            description: 'Expertise in Domain-Driven Design, Event Sourcing, and event-driven architecture. Valuable contributions to the DDD community.',
            url: 'https://verraes.net/',
            categories: ['architecture', 'ddd', 'bestPractices'],
+         },
+         {
+           name: 'Gregor Hohpe',
+           description: 'Authority on enterprise architecture, integration patterns, and digital transformation. Deep insights on scalability and complex systems design.',
+           url: 'https://architectelevator.com/',
+           categories: ['architecture', 'bestPractices', 'leadership'],
          },
       ],
     },
