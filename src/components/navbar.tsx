@@ -28,7 +28,6 @@ export default function Navbar({ showBack = false }: NavbarProps) {
     { href: '/#experiencia', label: navLabels.experience },
     { href: '/#habilidades', label: navLabels.skills },
     { href: '/books', label: navLabels.books },
-    { href: '/publications', label: navLabels.publications },
   ];
 
   return (
@@ -69,9 +68,6 @@ export default function Navbar({ showBack = false }: NavbarProps) {
                 </Link>
               );
             })}
-            <Link href="/#contato" className="py-3 border-b border-zinc-100 dark:border-zinc-800" onClick={() => setMobileMenuOpen(false)}>
-              {navLabels.contact}
-            </Link>
             <div className="flex gap-6 pt-4">
               <button onClick={toggleLocale} className="flex items-center gap-2 py-2">
                 <Globe className="w-5 h-5" /> {locale === 'pt-BR' ? 'Português' : 'English'}
@@ -102,13 +98,9 @@ export default function Navbar({ showBack = false }: NavbarProps) {
                   {link.label}
                 </Link>
               );
-            })}
-            
-            <Link href="/#contato" className="hover:text-blue-600 transition-colors">
-              {navLabels.contact}
-            </Link>
-            
-            <div className="flex items-center gap-2 ml-2 border-l border-zinc-300 dark:border-zinc-700 pl-4">
+             })}
+             
+             <div className="flex items-center gap-2 ml-2 border-l border-zinc-300 dark:border-zinc-700 pl-4">
               <button
                 onClick={toggleLocale}
                 className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
