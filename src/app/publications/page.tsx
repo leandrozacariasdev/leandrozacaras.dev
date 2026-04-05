@@ -1,11 +1,8 @@
 'use client';
 
-import Link from 'next/link';
-import { useTheme } from 'next-themes';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Sun, Moon, ArrowLeft, Globe } from 'lucide-react';
 import { useLocale, translations } from '@/components/locale-provider';
-import { useMounted } from '@/hooks/useMounted';
+import Navbar from '@/components/navbar';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -20,45 +17,14 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 export default function Publicacoes() {
-  const { theme, setTheme } = useTheme();
-  const { locale, setLocale } = useLocale();
+  const { locale } = useLocale();
   const t = translations[locale];
-  const mounted = useMounted();
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const toggleLocale = () => {
-    setLocale(locale === 'pt-BR' ? 'en' : 'pt-BR');
-  };
-
   return (
     <div className="min-h-screen transition-colors">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800">
-        <nav className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</Link>
-          <div className="flex gap-6 items-center text-sm">
-            <Link href="/" className="flex items-center gap-2 hover:text-blue-600 transition-colors">
-              <ArrowLeft className="w-4 h-4" />
-              {t.common.back}
-            </Link>
-            <button
-              onClick={toggleLocale}
-              className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-medium"
-              aria-label="Toggle language"
-            >
-              <Globe className="w-4 h-4" />
-              {locale === 'pt-BR' ? 'PT' : 'EN'}
-            </button>
-            <button
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-              aria-label="Alternar tema"
-            >
-              {mounted && (theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />)}
-            </button>
-          </div>
-        </nav>
-      </header>
+      <Navbar />
 
       <section className="pt-14 md:pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">

@@ -130,8 +130,8 @@ export default function Home() {
               {heroText.contact}
             </a>
             <Link
-              href="/experience"
-              className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg hover:border-blue-500 transition-colors"
+              href="/#experiencia"
+              className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
             >
               {heroText.viewExperience}
             </Link>
@@ -262,7 +262,7 @@ export default function Home() {
             <h2 className="text-3xl font-semibold mb-4">{contactText.title}</h2>
             <p className="text-zinc-600 dark:text-zinc-400 mb-12">{contactText.subtitle}</p>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             <FadeIn delay={0.1}>
               <a
                 href="mailto:me@leandrozacarias.dev"

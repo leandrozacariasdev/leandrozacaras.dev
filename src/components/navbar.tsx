@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Globe, Sun, Moon } from 'lucide-react';
 import { useLocale, translations } from '@/components/locale-provider';
@@ -13,6 +14,7 @@ interface NavbarProps {
 export default function Navbar({ showBack = false }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const { locale, setLocale, mounted } = useLocale();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const t = translations[locale];
@@ -23,11 +25,9 @@ export default function Navbar({ showBack = false }: NavbarProps) {
   };
 
   const allLinks = [
-    { href: '/about', label: navLabels.about },
-    { href: '/experience', label: navLabels.experience },
-    { href: '/skills', label: navLabels.skills },
+    { href: '/#experiencia', label: navLabels.experience },
+    { href: '/#habilidades', label: navLabels.skills },
     { href: '/books', label: navLabels.books },
-    { href: '/education', label: navLabels.education },
     { href: '/publications', label: navLabels.publications },
   ];
 
@@ -56,11 +56,19 @@ export default function Navbar({ showBack = false }: NavbarProps) {
                 ← {t.common.back}
               </Link>
             )}
-            {allLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="py-3 border-b border-zinc-100 dark:border-zinc-800" onClick={() => setMobileMenuOpen(false)}>
-                {link.label}
-              </Link>
-            ))}
+             {allLinks.map((link) => {
+              const isActive = pathname === link.href || pathname.startsWith(link.href + '/');
+              return (
+                <Link 
+                  key={link.href} 
+                  href={link.href} 
+                  className={`py-3 border-b border-zinc-100 dark:border-zinc-800 ${isActive ? 'text-blue-600 font-medium' : ''}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link href="/#contato" className="py-3 border-b border-zinc-100 dark:border-zinc-800" onClick={() => setMobileMenuOpen(false)}>
               {navLabels.contact}
             </Link>
@@ -80,12 +88,21 @@ export default function Navbar({ showBack = false }: NavbarProps) {
         <nav className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
           <Link href="/" className="font-bold text-lg">LZ<span className="text-blue-600 text-2xl">.</span>dev</Link>
           
-          <div className="flex items-center gap-6 text-sm">
-            {allLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-blue-600 transition-colors">
-                {link.label}
-              </Link>
-            ))}
+           <div className="flex items-center gap-6 text-sm">
+            {allLinks.map((link) => {
+              const isActive = link.href.startsWith('/#') 
+                ? false 
+                : (pathname === link.href || pathname.startsWith(link.href + '/'));
+              return (
+                <Link 
+                  key={link.href} 
+                  href={link.href} 
+                  className={`hover:text-blue-600 transition-colors ${isActive ? 'text-blue-600 font-medium border-b-2 border-blue-600 pb-1' : ''}`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             
             <Link href="/#contato" className="hover:text-blue-600 transition-colors">
               {navLabels.contact}

@@ -101,7 +101,7 @@ interface Translations {
     title: string;
     subtitle: string;
     categories: Record<string, string>;
-    booksList: Record<string, { title: string; author: string }>;
+    booksList: Record<string, { title: string; author: string; link?: string }>;
   };
   education: {
     title: string;
@@ -178,21 +178,22 @@ export const translations: Record<Locale, Translations> = {
         others: 'Outros',
       },
     },
-    books: {
-      title: 'Livros Recomendados',
-      subtitle: 'Livros que marcaram minha trajetória',
-      categories: {
-        software: 'Engenharia de Software',
-        career: 'Carreira',
-        bestPractices: 'Boas Práticas',
-        architecture: 'Arquitetura',
-      },
-      booksList: {
-        ddia: { title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann' },
-        pragmatic: { title: 'The Pragmatic Programmer', author: 'David Thomas & Andrew Hunt' },
-        cleanCode: { title: 'Clean Code', author: 'Robert C. Martin' },
-        systemDesign: { title: 'System Design Interview', author: 'Alex Xu' },
-      },
+     books: {
+       title: 'Livros Recomendados',
+       subtitle: 'Livros que marcaram minha trajetória',
+       categories: {
+         software: 'Engenharia de Software',
+         career: 'Carreira',
+         bestPractices: 'Boas Práticas',
+         architecture: 'Arquitetura',
+         usability: 'Usabilidade',
+       },
+       booksList: {
+         dontMakeMeThink: { title: 'Não me faça pensar: atualizado', author: 'Steve Krug', link: 'https://amzn.to/4dvMIb2' },
+         headFirstPatterns: { title: 'Use a Cabeça! Padrões de Projetos', author: 'Freeman & Robson', link: 'https://amzn.to/4dvMLne' },
+         domainDrivenDesign: { title: 'Domain-Driven Design', author: 'Eric Evans', link: 'https://amzn.to/48gS0nb' },
+         cleanCode: { title: 'Clean Code', author: 'Robert C. Martin', link: 'https://amzn.to/3PRFODd' },
+       },
     },
     education: {
       title: 'Formação e Premiações',
@@ -232,30 +233,30 @@ export const translations: Record<Locale, Translations> = {
       },
       {
         company: 'Grupo Flytour',
-        roles: [
-          { title: 'Coordenador de desenvolvimento', period: 'abr. 2018 - set. 2020', description: 'Definição de arquitetura, code review e orientação do time.' },
-          { title: 'Senior Development Analyst', period: 'fev. 2015 - abr. 2018', description: 'Migração para nuvem e desenvolvimento de plataforma CMS em Node.js.' },
-        ],
+         roles: [
+           { title: 'Tech Lead', period: 'abr. 2018 - set. 2020', description: 'Definição de arquitetura, code review e orientação do time.' },
+           { title: 'Software Engineer Senior', period: 'fev. 2015 - abr. 2018', description: 'Migração para nuvem e desenvolvimento de plataforma CMS em Node.js.' },
+         ],
       },
       {
         company: 'Ventron',
         roles: [
-          { title: 'Senior Development Analyst', period: 'jan. 2013 - jan. 2015', description: 'Desenvolvimento de sistemas para Livraria Saraiva, Vivo e Grupo Flytour.' },
+          { title: 'Software Engineer Senior', period: 'jan. 2013 - jan. 2015', description: 'Desenvolvimento de sistemas para Livraria Saraiva, Vivo e Grupo Flytour.' },
         ],
       },
       {
         company: 'Deal',
         roles: [
-          { title: 'Senior Development Analyst', period: 'jul. 2012 - dez. 2012', description: 'Migração de Power Builder para .NET no Itaú BBA.' },
-          { title: 'System Analyst', period: 'abr. 2010 - ago. 2010', description: 'Migração de legado do Banco BMC para Bradesco.' },
+          { title: 'Software Engineer Senior', period: 'jul. 2012 - dez. 2012', description: 'Migração de Power Builder para .NET no Itaú BBA.' },
+          { title: 'Software Engineer Senior', period: 'abr. 2010 - ago. 2010', description: 'Migração de legado do Banco BMC para Bradesco.' },
         ],
       },
-      {
-        company: 'Banco Cruzeiro do Sul',
-        roles: [
-          { title: 'Development Analyst', period: 'set. 2010 - jun. 2012', description: 'Processamento de propostas de empréstimo e sistema de gestão de serviços.' },
-        ],
-      },
+       {
+         company: 'Banco Cruzeiro do Sul',
+         roles: [
+           { title: 'Software Engineer', period: 'set. 2010 - jun. 2012', description: 'Processamento de propostas de empréstimo e sistema de gestão de serviços.' },
+         ],
+       },
       {
         company: 'BSA Brasil',
         roles: [
@@ -352,21 +353,22 @@ export const translations: Record<Locale, Translations> = {
         others: 'Others',
       },
     },
-    books: {
-      title: 'Recommended Books',
-      subtitle: 'Books that shaped my career',
-      categories: {
-        software: 'Software Engineering',
-        career: 'Career',
-        bestPractices: 'Best Practices',
-        architecture: 'Architecture',
-      },
-      booksList: {
-        ddia: { title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann' },
-        pragmatic: { title: 'The Pragmatic Programmer', author: 'David Thomas & Andrew Hunt' },
-        cleanCode: { title: 'Clean Code', author: 'Robert C. Martin' },
-        systemDesign: { title: 'System Design Interview', author: 'Alex Xu' },
-      },
+     books: {
+       title: 'Recommended Books',
+       subtitle: 'Books that shaped my career',
+       categories: {
+         software: 'Software Engineering',
+         career: 'Career',
+         bestPractices: 'Best Practices',
+         architecture: 'Architecture',
+         usability: 'Usability',
+       },
+       booksList: {
+         dontMakeMeThink: { title: "Don't Make Me Think: Revised", author: 'Steve Krug', link: 'https://amzn.to/4dvMIb2' },
+         headFirstPatterns: { title: 'Head First Design Patterns', author: 'Freeman & Robson', link: 'https://amzn.to/4dvMLne' },
+         domainDrivenDesign: { title: 'Domain-Driven Design', author: 'Eric Evans', link: 'https://amzn.to/48gS0nb' },
+         cleanCode: { title: 'Clean Code', author: 'Robert C. Martin', link: 'https://amzn.to/3PRFODd' },
+       },
     },
     education: {
       title: 'Education & Awards',
@@ -408,28 +410,28 @@ export const translations: Record<Locale, Translations> = {
         company: 'Grupo Flytour',
         roles: [
           { title: 'Development Coordinator', period: 'Apr 2018 - Sep 2020', description: 'Architecture definition, code review and team guidance.' },
-          { title: 'Senior Development Analyst', period: 'Feb 2015 - Apr 2018', description: 'Legacy to cloud migration and Node.js CMS platform.' },
+          { title: 'Software Engineer Senior', period: 'Feb 2015 - Apr 2018', description: 'Legacy to cloud migration and Node.js CMS platform.' },
         ],
       },
       {
         company: 'Ventron',
         roles: [
-          { title: 'Senior Development Analyst', period: 'Jan 2013 - Jan 2015', description: 'Systems development for Livraria Saraiva, Vivo and Grupo Flytour.' },
+          { title: 'Software Engineer Senior', period: 'Jan 2013 - Jan 2015', description: 'Systems development for Livraria Saraiva, Vivo and Grupo Flytour.' },
         ],
       },
       {
         company: 'Deal',
         roles: [
-          { title: 'Senior Development Analyst', period: 'Jul 2012 - Dec 2012', description: 'Power Builder to .NET migration for Itaú BBA.' },
-          { title: 'System Analyst', period: 'Apr 2010 - Aug 2010', description: 'Legacy migration from Banco BMC to Bradesco.' },
+          { title: 'Software Engineer Senior', period: 'Jul 2012 - Dec 2012', description: 'Power Builder to .NET migration for Itaú BBA.' },
+          { title: 'Software Engineer Senior', period: 'Apr 2010 - Aug 2010', description: 'Legacy migration from Banco BMC to Bradesco.' },
         ],
       },
-      {
-        company: 'Banco Cruzeiro do Sul',
-        roles: [
-          { title: 'Development Analyst', period: 'Sep 2010 - Jun 2012', description: 'Loan proposal processing and service management system.' },
-        ],
-      },
+       {
+         company: 'Banco Cruzeiro do Sul',
+         roles: [
+           { title: 'Software Engineer', period: 'Sep 2010 - Jun 2012', description: 'Loan proposal processing and service management system.' },
+         ],
+       },
       {
         company: 'BSA Brasil',
         roles: [

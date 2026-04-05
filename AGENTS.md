@@ -4,30 +4,23 @@ This file provides guidelines for agents working in this repository.
 
 ## Project Overview
 
-- **Tech Stack**: Next.js, React, TypeScript, Tailwind CSS
+- **Tech Stack**: Next.js 16, React 19, TypeScript, Tailwind CSS 4
 - **Purpose**: Personal portfolio/developer website
-- **Framework**: Next.js App Router
+- **Framework**: Next.js App Router (Turbopack)
 
 ## Build, Lint, and Test Commands
 
-### Standard Commands
 ```bash
-npm install           # Install dependencies
-npm run dev           # Start dev server
-npm run build         # Production build
-npm run start         # Start production server
-npm run lint          # Run ESLint
-npm run typecheck     # Run TypeScript type check
-npm run format        # Run Prettier formatting
-npm test              # Run all tests
+npm install     # Install dependencies
+npm run dev     # Start dev server (Turbopack)
+npm run build   # Production build
+npm run start   # Start production server
+npm run lint    # Run ESLint (Next.js + TypeScript rules)
 ```
 
-### Running a Single Test
-```bash
-npm test -- filename.test.ts           # Run specific test file
-npm test -- --testNamePattern="name"   # Run matching pattern
-npm test -- filename.test.ts --verbose # Debug test
-```
+### Notes
+- No test framework configured yet (can add Vitest/Jest if needed)
+- No separate typecheck script - Next.js build includes type checking
 
 ## Code Style Guidelines
 
@@ -35,42 +28,25 @@ npm test -- filename.test.ts --verbose # Debug test
 - Write clean, readable, maintainable code
 - Keep functions small and focused (single responsibility)
 - Use meaningful variable/function names
-- Avoid unnecessary comments - code should be self-documenting
 
 ### Imports
-- Use absolute imports over relative when possible
+- Use absolute imports (`@/`) over relative when possible
 - Order: external libraries → internal modules → relative imports
-- Use named exports over default exports
 
 ```typescript
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/lib/utils';
 ```
-
-### Formatting
-- Use Prettier (2-space indent, single quotes, trailing commas)
-- Max line length: 100 characters
 
 ### TypeScript
 - Always define return types for functions
 - Use explicit types over `any`
 - Prefer `interface` over `type` for object shapes
-- Use generics when applicable
 
-```typescript
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
-function getUserById(id: string): Promise<User | null> { return null; }
-```
-
-### Naming
-- **Files**: kebab-case (`user-profile.tsx`), PascalCase for components
+### Naming Conventions
+- **Files**: kebab-case for utilities, PascalCase for components
 - **Variables/functions**: camelCase
 - **Classes/interfaces**: PascalCase
 - **Constants**: SCREAMING_SNAKE_CASE
@@ -78,91 +54,90 @@ function getUserById(id: string): Promise<User | null> { return null; }
 
 ### React/Components
 - Use functional components with hooks
-- Colocate related files (component + tests)
 - Extract custom hooks for reusable logic
-- Memoize expensive computations with `useMemo`/`useCallback`
-- Prefer composition over context
+- Use `useMemo`/`useCallback` for expensive computations
+- Add 'use client' directive only when needed (hooks, event handlers)
 
 ### Error Handling
-- Use custom error classes for domain errors
 - Handle async errors with try/catch
 - Log errors appropriately (no secrets)
-- Provide user-friendly error messages
-
-```typescript
-try {
-  await riskyOperation();
-} catch (error) {
-  if (error instanceof ValidationError) {
-    showUserMessage(error.message);
-  } else {
-    logger.error('Unexpected error', error);
-    showGenericError();
-  }
-}
-```
-
-### State Management
-- Use local `useState` for component state
-- Use React Query/TanStack Query for server state
-- Avoid prop drilling - use context or composition
-
-### Testing
-- Test behavior, not implementation
-- Follow AAA pattern: Arrange, Act, Assert
-- Mock external dependencies
-- Test happy path + error cases + edge cases
 
 ## Directory Structure
+
 ```
 /src
-  /components     # Reusable UI components
-  /hooks          # Custom React hooks
-  /lib            # Utilities and helpers
-  /app            # Next.js App Router pages
-  /types          # TypeScript definitions
-  /styles         # Global styles
-/tests            # Test files
+  /app              # Next.js App Router pages
+  /components       # Reusable UI components
+  /hooks            # Custom React hooks
+  /lib              # Utilities and helpers
+/tests              # Test files (if added)
 ```
 
 ## Security
+
 - Never commit secrets, API keys, or credentials
 - Use environment variables for sensitive data
 - Validate and sanitize all user inputs
+
+## Tailwind CSS 4 Guidelines
+
+- Use utility classes for styling
+- Follow mobile-first responsive design
+- Use semantic HTML elements
+
+## Next.js App Router Guidelines
+
+- Use Server Components by default
+- Define shared layouts in `layout.tsx` files
+- Use async/await in Server Components for data fetching
 
 ## Git Conventions
 
 ### Deployment Rules
 - **NEVER publish to production without user approval**
+- **NEVER run `vercel --prod` without explicit user request**
 - Always test changes locally first with `npm run dev`
-- Wait for user to test and approve before running `vercel --prod`
-- Run `npm run lint` and `npm run build` locally before any deployment
+- Run `npm run lint` and `npm run build` locally before deployment
 
+### Commit Messages
 - Use semantic commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`
 - Keep commits atomic and focused
-- Write meaningful PR descriptions
+
+## Workflow
+
+### Before Making Changes
+1. Ask user what they want to implement
+2. Explain approach if needed
+3. Get user confirmation before proceeding
+
+### After Making Changes
+1. Run `npm run lint` and `npm run build` to verify code
+2. Show the user what was done
+3. **Wait for user to request deployment** - do NOT deploy automatically
+4. Only run `vercel --prod` when explicitly asked
 
 ## Common Patterns
 
-### API Calls
+### Client Component
 ```typescript
-// Use fetch or axios with interceptors
-// Handle loading, error, and success states
-// Return typed responses
+'use client';
+
+import { useState } from 'react';
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>;
+}
 ```
 
-### Form Handling
+### Theme Toggle
 ```typescript
-// Use react-hook-form for complex forms
-// Validate with Zod schema
-// Show inline validation errors
+const { theme, setTheme } = useTheme();
 ```
 
-### Data Fetching
+### Intersection Observer (Animations)
 ```typescript
-// Use React Query for server state
-// Implement proper cache invalidation
-// Handle loading and error states
+const { ref, inView } = useInView({ triggerOnce: true });
 ```
 
 ## Additional Resources

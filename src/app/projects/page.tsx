@@ -83,13 +83,13 @@ export default function Projetos() {
                     {project.title}
                   </h3>
                   <p className="text-zinc-600 dark:text-zinc-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech, i) => (
-                      <span key={i} className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                   <div className="flex flex-wrap gap-2 mb-4">
+                     {project.tech.map((tech, i) => (
+                       <span key={i} className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 text-sm rounded-full font-medium">
+                         {tech}
+                       </span>
+                     ))}
+                   </div>
                   <a
                     href={project.link}
                     className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
@@ -110,7 +110,7 @@ export default function Projetos() {
             <h2 className="text-3xl font-semibold mb-4">{t.contact.title}</h2>
             <p className="text-zinc-600 dark:text-zinc-400 mb-12">{t.contact.subtitle}</p>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             <FadeIn delay={0.1}>
               <a
                 href="mailto:me@leandrozacarias.dev"
