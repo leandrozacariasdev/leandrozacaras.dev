@@ -67,7 +67,7 @@ export default function Experiencia() {
         </nav>
       </header>
 
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-20 md:pt-32 pb-20 px-4">
         <motion.div style={{ opacity: heroOpacity }} className="max-w-4xl mx-auto text-center">
           <FadeIn>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{t.experience.title}</h1>
