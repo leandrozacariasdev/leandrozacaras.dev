@@ -25,7 +25,6 @@ export default function Navbar({ showBack = false }: NavbarProps) {
 
   const mainLinks = [
     { href: '/about', label: navLabels.about },
-    { href: '/projects', label: navLabels.projects },
     { href: '/experience', label: navLabels.experience },
   ];
 
