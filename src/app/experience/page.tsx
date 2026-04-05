@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, Sun, Moon, Globe } from 'lucide-react';
 import { useLocale, translations } from '@/components/locale-provider';
+import { useMounted } from '@/hooks/useMounted';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -18,12 +18,6 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       {children}
     </motion.div>
   );
-}
-
-function useMounted() {
-  const [mounted, setMounted] = useState(false);
-  useState(() => setMounted(true));
-  return mounted;
 }
 
 export default function Experiencia() {

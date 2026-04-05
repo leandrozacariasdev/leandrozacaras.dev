@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, Sun, Moon, ExternalLink, Mail, MapPin, Globe } from 'lucide-react';
 import { XIcon, GithubIconFilled, LinkedInIconFilled } from '@/components/icons';
 import { useLocale, translations } from '@/components/locale-provider';
+import { useMounted } from '@/hooks/useMounted';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -18,11 +18,6 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       {children}
     </motion.div>
   );
-}
-
-function useMounted() {
-  const [mounted] = useState(false);
-  return mounted;
 }
 
 export default function Projetos() {

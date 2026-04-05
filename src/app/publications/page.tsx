@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ExternalLink, Sun, Moon, ArrowLeft, Globe } from 'lucide-react';
+import { Sun, Moon, ArrowLeft, Globe } from 'lucide-react';
 import { useLocale, translations } from '@/components/locale-provider';
+import { useMounted } from '@/hooks/useMounted';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -17,11 +17,6 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       {children}
     </motion.div>
   );
-}
-
-function useMounted() {
-  const [mounted] = useState(false);
-  return mounted;
 }
 
 export default function Publicacoes() {
@@ -75,29 +70,17 @@ export default function Publicacoes() {
       </section>
 
       <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-6">
-            {t.publications.list.map((pub, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="p-6 bg-white dark:bg-zinc-900 rounded-xl border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all"
-                >
-                  <h2 className="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">
-                    {pub.title}
-                  </h2>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4">{pub.description}</p>
-                  <a
-                    href={pub.link}
-                    className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    {t.publications.readMore}
-                  </a>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <FadeIn>
+            <div className="p-12 bg-white dark:bg-zinc-900 rounded-xl border-zinc-200 dark:border-zinc-800 border">
+              <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">
+                {t.publications.title}
+              </h2>
+              <p className="text-zinc-600 dark:text-zinc-400 text-lg">
+                Em construção...
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </div>

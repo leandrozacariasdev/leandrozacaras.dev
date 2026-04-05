@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, Sun, Moon, Globe } from 'lucide-react';
 import { useLocale, translations } from '@/components/locale-provider';
+import { useMounted } from '@/hooks/useMounted';
 
 const SKILLS = [
   { category: 'languages', items: ['C#', '.NET Core', 'Kotlin', 'Python', 'JavaScript', 'Node.js'] },
@@ -28,11 +28,6 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       {children}
     </motion.div>
   );
-}
-
-function useMounted() {
-  const [mounted] = useState(false);
-  return mounted;
 }
 
 export default function Habilidades() {
