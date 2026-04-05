@@ -21,7 +21,7 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
-type TabType = 'books' | 'blogs' | 'authors';
+type TabType = 'books' | 'blogs';
 
 export default function Recomendacoes() {
   const { locale } = useLocale();
@@ -34,15 +34,12 @@ export default function Recomendacoes() {
   const booksCategories = t.books.categories as Record<string, string>;
   const blogsList = t.blogs.blogsList;
   const blogsCategories = t.blogs.categories as Record<string, string>;
-  const authorsList = t.authors.authorsList;
-  const authorsCategories = t.authors.categories as Record<string, string>;
 
   const isPortuguese = locale === 'pt-BR';
   
   const tabs: { id: TabType; label: string; count: number }[] = [
     { id: 'books', label: isPortuguese ? 'Livros' : 'Books', count: BOOKS_KEYS.length },
     { id: 'blogs', label: isPortuguese ? 'Blogs' : 'Blogs', count: blogsList.length },
-    { id: 'authors', label: isPortuguese ? 'Autores' : 'Authors', count: authorsList.length },
   ];
 
   return (
@@ -183,65 +180,6 @@ export default function Recomendacoes() {
                   </FadeIn>
                 ))}
               </div>
-            </motion.div>
-          )}
-
-          {/* Authors Tab */}
-          {activeTab === 'authors' && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <FadeIn>
-                <div className="mb-12 p-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg">
-                  <p className="text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                    {isPortuguese
-                      ? 'Autores cujas obras e pensamentos influenciam minha forma de arquitetar sistemas e desenvolver software com qualidade.'
-                      : 'Authors whose works and thoughts influence how I architect systems and develop quality software.'}
-                  </p>
-                </div>
-              </FadeIn>
-              {authorsList.length === 0 ? (
-                <div className="text-center py-12">
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    {isPortuguese ? 'Em breve...' : 'Coming soon...'}
-                  </p>
-                </div>
-              ) : (
-                <div className="grid md:grid-cols-2 gap-4">
-                  {authorsList.map((author, index) => (
-                    <FadeIn key={index} delay={index * 0.1}>
-                      <motion.a 
-                        whileHover={{ scale: 1.02 }}
-                        href={author.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="group p-6 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all flex flex-col h-full"
-                      >
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-100 to-green-50 dark:from-green-900/40 dark:to-green-800/20 flex items-center justify-center flex-shrink-0 group-hover:from-green-200 group-hover:to-green-100 dark:group-hover:from-green-800/60 dark:group-hover:to-green-700/40 transition-colors">
-                            <BookOpen className="w-6 h-6 text-green-600 dark:text-green-400" />
-                          </div>
-                          <Star className="w-5 h-5 text-yellow-400 fill-yellow-400 flex-shrink-0" />
-                        </div>
-                        <h3 className="font-semibold text-lg mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-grow">{author.name}</h3>
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 flex-grow">{author.description}</p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex flex-wrap gap-1">
-                            {author.categories.slice(0, 2).map((cat, idx) => (
-                              <span key={idx} className="text-xs font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40 px-2 py-1 rounded">
-                                {authorsCategories[cat as keyof typeof authorsCategories]}
-                              </span>
-                            ))}
-                          </div>
-                          <ExternalLink className="w-4 h-4 text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-shrink-0" />
-                        </div>
-                      </motion.a>
-                    </FadeIn>
-                  ))}
-                </div>
-              )}
             </motion.div>
           )}
         </div>
