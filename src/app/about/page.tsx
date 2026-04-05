@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, MapPin, ArrowDown } from 'lucide-react';
-import { LinkedInIcon } from '@/components/icons';
+import { XIcon, GithubIconFilled, LinkedInIconFilled } from '@/components/icons';
 import { useLocale, translations } from '@/components/locale-provider';
 import Navbar from '@/components/navbar';
 
@@ -90,36 +90,62 @@ export default function Sobre() {
       </section>
 
       <footer id="contato" className="py-20 px-4 bg-white dark:bg-zinc-900">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <FadeIn>
             <h2 className="text-3xl font-semibold mb-4">{t.contact.title}</h2>
             <p className="text-zinc-600 dark:text-zinc-400 mb-12">{t.contact.subtitle}</p>
           </FadeIn>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <FadeIn delay={0.1}>
               <a
                 href="mailto:me@leandrozacarias.dev"
-                className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105"
+                aria-label="Enviar email para me@leandrozacarias.dev"
+                className="flex flex-col items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
               >
-                <Mail className="text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>me@leandrozacarias.dev</span>
+                <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" aria-hidden="true" />
+                <span className="text-sm font-medium">me@leandrozacarias.dev</span>
               </a>
             </FadeIn>
-            <FadeIn delay={0.3}>
-              <div className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800">
-                <MapPin className="text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>{t.contact.location}</span>
+            <FadeIn delay={0.2}>
+              <div className="flex flex-col items-center justify-center gap-3 p-4 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                <MapPin className="w-6 h-6 text-zinc-500 dark:text-zinc-400 flex-shrink-0" aria-hidden="true" />
+                <span className="text-sm font-medium text-zinc-600 dark:text-zinc-300">{t.contact.location}</span>
               </div>
             </FadeIn>
-            <FadeIn delay={0.5}>
+            <FadeIn delay={0.3}>
               <a
                 href="https://linkedin.com/in/leandrozacarias"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105"
+                aria-label="Visite meu perfil no LinkedIn"
+                className="flex flex-col items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
               >
-                <LinkedInIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>LinkedIn</span>
+                <LinkedInIconFilled className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                <span className="text-sm font-medium">LinkedIn</span>
+              </a>
+            </FadeIn>
+            <FadeIn delay={0.4}>
+              <a
+                href="https://x.com/leandrozacaria_"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Siga-me no X (Twitter)"
+                className="flex flex-col items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+              >
+                <XIcon className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                <span className="text-sm font-medium">X</span>
+              </a>
+            </FadeIn>
+            <FadeIn delay={0.5}>
+              <a
+                href="https://github.com/leandrozacariasdev"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Veja meus projetos no GitHub"
+                className="flex flex-col items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+              >
+                <GithubIconFilled className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                <span className="text-sm font-medium">GitHub</span>
               </a>
             </FadeIn>
           </div>

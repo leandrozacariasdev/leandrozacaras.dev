@@ -4,10 +4,10 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Mail, MapPin, ExternalLink, ArrowDown } from 'lucide-react';
-import { LinkedInIcon } from '@/components/icons';
+import { Mail, MapPin, ArrowDown } from 'lucide-react';
 import { useLocale, translations } from '@/components/locale-provider';
 import Navbar from '@/components/navbar';
+import { XIcon, LinkedInIconFilled, GithubIconFilled } from '@/components/icons';
 
 const SKILLS = [
   { category: 'languages', items: ['C#', '.NET Core', 'Kotlin', 'Python', 'JavaScript', 'Node.js'] },
@@ -46,10 +46,8 @@ export default function Home() {
 
   const t = translations[locale];
 
-  const navLabels = t.nav;
   const heroText = t.hero;
   const contactText = t.contact;
-  const projectsText = t.projectsPage;
   const skillsText = t.skills.categories;
   const educationText = t.education;
 
@@ -66,6 +64,15 @@ export default function Home() {
         </div>
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 text-center px-4">
+          <motion.h1
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, type: 'spring', delay: 0.1 }}
+            className="sr-only"
+          >
+            Leandro Zacarias - Software Engineer & Tech Lead
+          </motion.h1>
+          
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -74,7 +81,7 @@ export default function Home() {
           >
             <Image
               src="/profile.jpeg"
-              alt="Leandro Zacarias"
+              alt="Leandro Zacarias - Software Engineer e Tech Lead com 20+ anos de experiência"
               width={160}
               height={160}
               className="w-full h-full object-cover"
@@ -158,44 +165,6 @@ export default function Home() {
                   <div className="w-2 h-2 rounded-full bg-blue-500" />
                   <span className="text-zinc-300">{award}</span>
                 </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="projetos" className="py-20 px-4 scroll-mt-24">
-        <div className="max-w-5xl mx-auto">
-          <FadeIn>
-            <h2 className="text-3xl font-semibold mb-4 text-center">{projectsText.title}</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-center mb-12">{projectsText.subtitle}</p>
-          </FadeIn>
-          <div className="grid md:grid-cols-2 gap-6">
-            {t.projects.map((project, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="group p-6 bg-white dark:bg-zinc-900 rounded-xl border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all"
-                >
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-600 dark:text-blue-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech, i) => (
-                      <span key={i} className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <a
-                    href={project.link}
-                    className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    {projectsText.viewProject}
-                  </a>
-                </motion.div>
               </FadeIn>
             ))}
           </div>
@@ -287,36 +256,62 @@ export default function Home() {
       </section>
 
       <section id="contato" className="py-20 px-4 scroll-mt-24">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <FadeIn>
             <h2 className="text-3xl font-semibold mb-4">{contactText.title}</h2>
             <p className="text-zinc-600 dark:text-zinc-400 mb-12">{contactText.subtitle}</p>
           </FadeIn>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <FadeIn delay={0.1}>
               <a
                 href="mailto:me@leandrozacarias.dev"
-                className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105"
+                aria-label="Enviar email para me@leandrozacarias.dev"
+                className="flex flex-col items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
               >
-                <Mail className="text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>me@leandrozacarias.dev</span>
+                <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" aria-hidden="true" />
+                <span className="text-sm font-medium">me@leandrozacarias.dev</span>
               </a>
             </FadeIn>
-            <FadeIn delay={0.3}>
-              <div className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800">
-                <MapPin className="text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>{contactText.location}</span>
+            <FadeIn delay={0.2}>
+              <div className="flex flex-col items-center justify-center gap-3 p-4 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                <MapPin className="w-6 h-6 text-zinc-500 dark:text-zinc-400 flex-shrink-0" aria-hidden="true" />
+                <span className="text-sm font-medium text-zinc-600 dark:text-zinc-300">{contactText.location}</span>
               </div>
             </FadeIn>
-            <FadeIn delay={0.4}>
+            <FadeIn delay={0.3}>
               <a
                 href="https://linkedin.com/in/leandrozacarias"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105"
+                aria-label="Visite meu perfil no LinkedIn"
+                className="flex flex-col items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
               >
-                <LinkedInIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                <span>linkedin.com/in/leandrozacarias</span>
+                <LinkedInIconFilled className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                <span className="text-sm font-medium">LinkedIn</span>
+              </a>
+            </FadeIn>
+            <FadeIn delay={0.4}>
+              <a
+                href="https://x.com/leandrozacaria_"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Siga-me no X (Twitter)"
+                className="flex flex-col items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+              >
+                <XIcon className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                <span className="text-sm font-medium">X</span>
+              </a>
+            </FadeIn>
+            <FadeIn delay={0.5}>
+              <a
+                href="https://github.com/leandrozacariasdev"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Veja meus projetos no GitHub"
+                className="flex flex-col items-center justify-center gap-3 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none"
+              >
+                <GithubIconFilled className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                <span className="text-sm font-medium">GitHub</span>
               </a>
             </FadeIn>
           </div>
