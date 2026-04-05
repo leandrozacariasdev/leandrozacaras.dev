@@ -21,7 +21,7 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
-type TabType = 'books' | 'blogs' | 'others';
+type TabType = 'books' | 'blogs' | 'others' | 'articles';
 
 export default function Recomendacoes() {
   const { locale } = useLocale();
@@ -36,6 +36,8 @@ export default function Recomendacoes() {
   const blogsCategories = t.blogs.categories as Record<string, string>;
   const othersList = t.others.othersList;
   const othersCategories = t.others.categories as Record<string, string>;
+  const articlesList = t.articles.articlesList;
+  const articlesCategories = t.articles.categories as Record<string, string>;
 
   const isPortuguese = locale === 'pt-BR';
   
@@ -43,6 +45,7 @@ export default function Recomendacoes() {
     { id: 'books', label: isPortuguese ? 'Livros' : 'Books', count: BOOKS_KEYS.length },
     { id: 'blogs', label: isPortuguese ? 'Blogs' : 'Blogs', count: blogsList.length },
     { id: 'others', label: isPortuguese ? 'Outros' : 'Others', count: othersList.length },
+    { id: 'articles', label: isPortuguese ? 'Artigos' : 'Articles', count: articlesList.length },
   ];
 
   return (
@@ -225,6 +228,57 @@ export default function Recomendacoes() {
                           {resource.categories.slice(0, 2).map((cat, idx) => (
                             <span key={idx} className="text-xs font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2 py-1 rounded">
                               {othersCategories[cat as keyof typeof othersCategories]}
+                            </span>
+                          ))}
+                        </div>
+                        <ExternalLink className="w-4 h-4 text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-shrink-0" />
+                      </div>
+                    </motion.a>
+                  </FadeIn>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Articles Tab */}
+          {activeTab === 'articles' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <FadeIn>
+                <div className="mb-12 p-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg">
+                  <p className="text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                    {isPortuguese
+                      ? 'Artigos fundamentais que todo arquiteto de software deveria ler. Leituras essenciais que ajudam a entender a história, evolução e fundamentos da arquitetura moderna.'
+                      : 'Essential articles every software architect should read. Fundamental readings that help understand the history, evolution, and foundations of modern architecture.'}
+                  </p>
+                </div>
+              </FadeIn>
+              <div className="grid md:grid-cols-2 gap-4">
+                {articlesList.map((article, index) => (
+                  <FadeIn key={index} delay={index * 0.1}>
+                    <motion.a 
+                      whileHover={{ scale: 1.02 }}
+                      href={article.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group p-6 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all flex flex-col h-full"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-rose-100 to-rose-50 dark:from-rose-900/40 dark:to-rose-800/20 flex items-center justify-center flex-shrink-0 group-hover:from-rose-200 group-hover:to-rose-100 dark:group-hover:from-rose-800/60 dark:group-hover:to-rose-700/40 transition-colors">
+                          <Globe className="w-6 h-6 text-rose-600 dark:text-rose-400" />
+                        </div>
+                        <Star className="w-5 h-5 text-yellow-400 fill-yellow-400 flex-shrink-0" />
+                      </div>
+                      <h3 className="font-semibold text-lg mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-grow">{article.name}</h3>
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 flex-grow">{article.description}</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-wrap gap-1">
+                          {article.categories.slice(0, 2).map((cat, idx) => (
+                            <span key={idx} className="text-xs font-medium text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 px-2 py-1 rounded">
+                              {articlesCategories[cat as keyof typeof articlesCategories]}
                             </span>
                           ))}
                         </div>

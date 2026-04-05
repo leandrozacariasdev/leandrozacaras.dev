@@ -121,6 +121,12 @@ interface Translations {
      categories: Record<string, string>;
      othersList: { name: string; description: string; url: string; categories: string[] }[];
    };
+   articles: {
+     title: string;
+     subtitle: string;
+     categories: Record<string, string>;
+     articlesList: { name: string; description: string; url: string; categories: string[] }[];
+   };
    education: {
     title: string;
     subtitle: string;
@@ -207,7 +213,7 @@ export const translations: Record<Locale, Translations> = {
         usability: 'Usabilidade',
       },
       booksList: {
-        dontMakeMeThink: { title: 'Não me faça pensar: atualizado', author: 'Steve Krug', link: 'https://amzn.to/4dvMIb2' },
+        dontMakeMeThink: { title: 'Não me faça pensar', author: 'Steve Krug', link: 'https://amzn.to/4dvMIb2' },
         headFirstPatterns: { title: 'Use a Cabeça! Padrões de Projetos', author: 'Freeman & Robson', link: 'https://amzn.to/4dvMLne' },
         domainDrivenDesign: { title: 'Domain-Driven Design', author: 'Eric Evans', link: 'https://amzn.to/48gS0nb' },
         cleanCode: { title: 'Clean Code', author: 'Robert C. Martin', link: 'https://amzn.to/3PRFODd' },
@@ -320,9 +326,27 @@ export const translations: Record<Locale, Translations> = {
          url: 'https://www.enterpriseintegrationpatterns.com/',
          categories: ['architecture', 'integration', 'patterns'],
        },
-     ],
-   },
-     education: {
+      ],
+    },
+    articles: {
+      title: 'Artigos Essenciais',
+      subtitle: 'Artigos que todo arquiteto de software deveria ler',
+      categories: {
+        architecture: 'Arquitetura',
+        history: 'História',
+        ddd: 'Domain-Driven Design',
+        patterns: 'Padrões',
+      },
+      articlesList: [
+        {
+          name: 'The Software Architecture Chronicles',
+          description: 'Série definitiva de Herberto Graca sobre evolução da arquitetura de software. Desde programação não estruturada até microservices, uma jornada cronológica essencial para entender a história e fundamentos da arquitetura moderna.',
+          url: 'https://herbertograca.com/2017/07/03/the-software-architecture-chronicles/',
+          categories: ['architecture', 'history', 'patterns'],
+        },
+      ],
+    },
+    education: {
       title: 'Formação e Premiações',
       subtitle: 'Educação e reconhecimentos',
       educationTitle: 'Formação Acadêmica',
@@ -605,12 +629,30 @@ export const translations: Record<Locale, Translations> = {
            categories: ['architecture', 'integration', 'patterns'],
          },
        ],
-     },
-     education: {
-      title: 'Education & Awards',
-      subtitle: 'Education and recognitions',
-      educationTitle: 'Education',
-      awardsTitle: 'Awards',
+      },
+      articles: {
+        title: 'Essential Articles',
+        subtitle: 'Articles every software architect should read',
+        categories: {
+          architecture: 'Architecture',
+          history: 'History',
+          ddd: 'Domain-Driven Design',
+          patterns: 'Patterns',
+        },
+        articlesList: [
+          {
+            name: 'The Software Architecture Chronicles',
+            description: 'Herberto Graca\'s definitive series on software architecture evolution. From unstructured programming to microservices, an essential chronological journey to understand the history and foundations of modern architecture.',
+            url: 'https://herbertograca.com/2017/07/03/the-software-architecture-chronicles/',
+            categories: ['architecture', 'history', 'patterns'],
+          },
+        ],
+      },
+      education: {
+       title: 'Education & Awards',
+       subtitle: 'Education and recognitions',
+       educationTitle: 'Education',
+       awardsTitle: 'Awards',
       education: [
         { institution: 'Universidade Anhembi Morumbi', degree: 'Postgraduate in Software Development with Agile Methodologies', period: '2020 - 2021' },
         { institution: 'Faculdades Oswaldo Cruz', degree: 'Technology Degree in Information Systems', period: '2005 - 2007' },
