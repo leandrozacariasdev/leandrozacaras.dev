@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Star, ExternalLink } from 'lucide-react';
 import { useLocale, translations } from '@/components/locale-provider';
 import Navbar from '@/components/navbar';
 
@@ -44,26 +44,38 @@ export default function Livros() {
 
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
+          <FadeIn>
+            <div className="mb-12 p-6 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg">
+              <p className="text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                Aqui estão as recomendações de livros que marcaram minha trajetória como engenheiro de software. São leituras que influenciaram minha forma de pensar sobre código, arquitetura e desenvolvimento. Se você busca aprender com os melhores, essas são excelentes escolhas para sua biblioteca profissional.
+              </p>
+            </div>
+          </FadeIn>
           <div className="grid md:grid-cols-2 gap-4">
             {BOOKS_KEYS.map((key, index) => {
               const book = booksList[key];
               return (
                 <FadeIn key={index} delay={index * 0.1}>
-                  <a 
+                  <motion.a 
+                    whileHover={{ scale: 1.02 }}
                     href={book.link || '#'} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border-zinc-200 dark:border-zinc-800 hover:border-blue-500/30 transition-all block"
+                    className="group p-6 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/50 transition-all flex flex-col h-full"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
-                      <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/40 dark:to-blue-800/20 flex items-center justify-center flex-shrink-0 group-hover:from-blue-200 group-hover:to-blue-100 dark:group-hover:from-blue-800/60 dark:group-hover:to-blue-700/40 transition-colors">
+                        <BookOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <Star className="w-5 h-5 text-yellow-400 fill-yellow-400 flex-shrink-0" aria-label="Recomendação" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold">{book.title}</h3>
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400">{book.author}</p>
-                      <span className="text-xs text-blue-600 dark:text-blue-400">{categories[BOOK_CATEGORIES[index]]}</span>
+                    <h3 className="font-semibold text-lg mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-grow">{book.title}</h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">{book.author}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2 py-1 rounded">{categories[BOOK_CATEGORIES[index]]}</span>
+                      <ExternalLink className="w-4 h-4 text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
                     </div>
-                  </a>
+                  </motion.a>
                 </FadeIn>
               );
             })}
