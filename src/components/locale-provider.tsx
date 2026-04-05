@@ -217,19 +217,37 @@ export const translations: Record<Locale, Translations> = {
         leadership: 'Liderança Técnica',
         cleanCode: 'Clean Code',
       },
-      blogsList: [
-        {
-          name: 'Martin Fowler',
-          description: 'Insights sobre arquitetura de software, padrões de design e boas práticas. Uma das maiores referências em engenharia de software.',
-          url: 'https://martinfowler.com/',
-          categories: ['architecture', 'bestPractices', 'ddd'],
-        },
-        {
-          name: 'Kamil Grzybek',
-          description: 'Exploração profunda em Domain-Driven Design, arquitetura clean e padrões avançados de desenvolvimento.',
-          url: 'https://www.kamilgrzybek.com/',
-          categories: ['architecture', 'ddd', 'cleanCode'],
-        },
+       blogsList: [
+         {
+           name: 'Martin Fowler',
+           description: 'Insights sobre arquitetura de software, padrões de design e boas práticas. Uma das maiores referências em engenharia de software.',
+           url: 'https://martinfowler.com/',
+           categories: ['architecture', 'bestPractices', 'ddd'],
+         },
+         {
+           name: 'Kamil Grzybek',
+           description: 'Exploração profunda em Domain-Driven Design, arquitetura clean e padrões avançados de desenvolvimento.',
+           url: 'https://www.kamilgrzybek.com/',
+           categories: ['architecture', 'ddd', 'cleanCode'],
+         },
+         {
+           name: 'Allen Holub',
+           description: 'Pensamento crítico sobre desenvolvimento ágil, arquitetura de software e design orientado a objetos. Referência em metodologias e práticas modernas.',
+           url: 'https://holub.com/',
+           categories: ['architecture', 'bestPractices', 'leadership'],
+         },
+         {
+           name: 'Dave Farley',
+           description: 'Especialista em continuous delivery, automação de testes e práticas DevOps. Conhecimento profundo em engenharia de software moderna.',
+           url: 'https://www.davefarley.net/',
+           categories: ['bestPractices', 'cleanCode', 'leadership'],
+         },
+         {
+           name: 'Chris Richardson',
+           description: 'Autoridade em arquitetura de microsserviços, padrões distribuídos e desenvolvimento escalável. Referência indispensável para sistemas complexos.',
+           url: 'https://chrisrichardson.net/',
+           categories: ['architecture', 'ddd', 'bestPractices'],
+         },
       ],
     },
     authors: {
@@ -429,19 +447,37 @@ export const translations: Record<Locale, Translations> = {
         leadership: 'Technical Leadership',
         cleanCode: 'Clean Code',
       },
-      blogsList: [
-        {
-          name: 'Martin Fowler',
-          description: 'Insights on software architecture, design patterns, and best practices. One of the biggest references in software engineering.',
-          url: 'https://martinfowler.com/',
-          categories: ['architecture', 'bestPractices', 'ddd'],
-        },
-        {
-          name: 'Kamil Grzybek',
-          description: 'Deep exploration into Domain-Driven Design, clean architecture, and advanced development patterns.',
-          url: 'https://www.kamilgrzybek.com/',
-          categories: ['architecture', 'ddd', 'cleanCode'],
-        },
+       blogsList: [
+         {
+           name: 'Martin Fowler',
+           description: 'Insights on software architecture, design patterns, and best practices. One of the biggest references in software engineering.',
+           url: 'https://martinfowler.com/',
+           categories: ['architecture', 'bestPractices', 'ddd'],
+         },
+         {
+           name: 'Kamil Grzybek',
+           description: 'Deep exploration into Domain-Driven Design, clean architecture, and advanced development patterns.',
+           url: 'https://www.kamilgrzybek.com/',
+           categories: ['architecture', 'ddd', 'cleanCode'],
+         },
+         {
+           name: 'Allen Holub',
+           description: 'Critical thinking on agile development, software architecture, and object-oriented design. Reference in modern methodologies and practices.',
+           url: 'https://holub.com/',
+           categories: ['architecture', 'bestPractices', 'leadership'],
+         },
+         {
+           name: 'Dave Farley',
+           description: 'Specialist in continuous delivery, test automation, and DevOps practices. Deep knowledge in modern software engineering.',
+           url: 'https://www.davefarley.net/',
+           categories: ['bestPractices', 'cleanCode', 'leadership'],
+         },
+         {
+           name: 'Chris Richardson',
+           description: 'Authority on microservices architecture, distributed patterns, and scalable development. Essential reference for complex systems.',
+           url: 'https://chrisrichardson.net/',
+           categories: ['architecture', 'ddd', 'bestPractices'],
+         },
       ],
     },
     authors: {
