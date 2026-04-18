@@ -344,6 +344,12 @@ export const translations: Record<Locale, Translations> = {
           url: 'https://herbertograca.com/2017/07/03/the-software-architecture-chronicles/',
           categories: ['architecture', 'history', 'patterns'],
         },
+        {
+          name: 'Software Architecture Guide — Martin Fowler',
+          description: 'Guia abrangente de Martin Fowler sobre arquitetura de software: o que é, por que importa e os principais padrões e estilos arquiteturais modernos. Referência essencial para qualquer engenheiro sério.',
+          url: 'https://martinfowler.com/architecture/',
+          categories: ['architecture', 'patterns'],
+        },
       ],
     },
     education: {
@@ -644,6 +650,12 @@ export const translations: Record<Locale, Translations> = {
             description: 'Herberto Graca\'s definitive series on software architecture evolution. From unstructured programming to microservices, an essential chronological journey to understand the history and foundations of modern architecture.',
             url: 'https://herbertograca.com/2017/07/03/the-software-architecture-chronicles/',
             categories: ['architecture', 'history', 'patterns'],
+          },
+          {
+            name: 'Software Architecture Guide — Martin Fowler',
+            description: 'Martin Fowler\'s comprehensive guide on software architecture: what it is, why it matters, and the key modern architectural patterns and styles. An essential reference for any serious engineer.',
+            url: 'https://martinfowler.com/architecture/',
+            categories: ['architecture', 'patterns'],
           },
         ],
       },
